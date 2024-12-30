@@ -422,7 +422,7 @@ class SubscriptionsListView(PageTitleMixin, generic.TemplateView):
         user = self.request.user
         ctx = super().get_context_data(**kwargs)
         ctx["currency"] =  settings.PLANS_CURRENCY
-        ctx["available_plans"] = Plan.objects.filter(available=True)
+        ctx["available_plans"] = Plan.objects.filter(available=True, visible=True)
         try:
             ctx["current_plan"] = user.userplan.plan
             ctx["current_plan_active"] = user.userplan.is_active()
