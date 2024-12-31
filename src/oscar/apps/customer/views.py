@@ -622,7 +622,7 @@ class SubscribeView(PageTitleMixin, generic.View):
             'page_title': self.page_title,
             'active_tab': self.active_tab,
             'plan': plan,
-            'currency': 'USD'  # You might want to make this dynamic
+            'currency': settings.PLANS_CURRENCY
         }
 
     def post(self, request, *args, **kwargs):
@@ -805,7 +805,7 @@ class ChangeSubscriptionView(PageTitleMixin, generic.View):
                             new_plan.name,
                             branches,
                             total_change_price,
-                            'USD'  # You might want to make this dynamic
+                            settings.PLANS_CURRENCY
                         )
                     )
                 
