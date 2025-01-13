@@ -89,31 +89,31 @@ class AttributeOptionGroupAdmin(admin.ModelAdmin):
     ]
 
 
-class CategoryAdmin(TreeAdmin):
-    # Use the form for handling tree structure
-    form = movenodeform_factory(Category)
+# class CategoryAdmin(TreeAdmin):
+#     # Use the form for handling tree structure
+#     form = movenodeform_factory(Category)
     
-    # Add fields to the list display
-    list_display = ("name", "vendor", "slug", "is_public", "order", "meta_title")
+#     # Add fields to the list display
+#     list_display = ("name", "vendor", "slug", "is_public", "order", "meta_title")
     
-    # Add filters for the admin panel
-    list_filter = ("vendor", "is_public")
+#     # Add filters for the admin panel
+#     list_filter = ("vendor", "is_public")
     
-    # Add search capabilities
-    search_fields = ("name", "slug", "vendor__name", "meta_title")
+#     # Add search capabilities
+#     search_fields = ("name", "slug", "vendor__name", "meta_title")
     
-    # Add ordering for the admin panel
-    ordering = ("vendor", "order")
+#     # Add ordering for the admin panel
+#     ordering = ("vendor", "order")
     
-    # Enable editing fields directly in the list view
-    list_editable = ("is_public", "order")
+#     # Enable editing fields directly in the list view
+#     list_editable = ("is_public", "order")
     
-    # Customize fieldsets (Optional)
-    fieldsets = (
-        (None, {"fields": ("name_en", "name_ar", "slug", "vendor", "description", "description_en", "description_ar", "image")}),
-        ("Visibility", {"fields": ("is_public", "order")}),
-        ("SEO", {"fields": ("meta_title", "meta_description")}),
-    )
+#     # Customize fieldsets (Optional)
+#     fieldsets = (
+#         (None, {"fields": ("name_en", "name_ar", "slug", "vendor", "description_en", "description_ar", "image")}),
+#         ("Visibility", {"fields": ("is_public", "order")}),
+#         ("SEO", {"fields": ("meta_title", "meta_description")}),
+#     )
 
 
 admin.site.register(ProductClass, ProductClassAdmin)
@@ -123,5 +123,6 @@ admin.site.register(ProductAttributeValue, ProductAttributeValueAdmin)
 admin.site.register(AttributeOptionGroup, AttributeOptionGroupAdmin)
 admin.site.register(Option, OptionAdmin)
 admin.site.register(ProductImage)
-admin.site.register(Category, CategoryAdmin)
+# admin.site.register(Category, CategoryAdmin)
+admin.site.register(Category)
 admin.site.register(ProductCategory)

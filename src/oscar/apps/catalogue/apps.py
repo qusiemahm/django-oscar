@@ -1,6 +1,7 @@
 from django.apps import apps
 from django.urls import include, path, re_path
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import redirect
 
 from oscar.core.application import OscarConfig
 from oscar.core.loading import get_class
@@ -25,21 +26,26 @@ class CatalogueOnlyConfig(OscarConfig):
         self.range_view = get_class("offer.views", "RangeDetailView")
 
     def get_urls(self):
-        urls = super().get_urls()
-        urls += [
-            path("", self.catalogue_view.as_view(), name="index"),
+    # Define a redirect view to the dashboard
+        def redirect_to_dashboard(request, *args, **kwargs):
+            return redirect('/dashboard/')
+
+        urls = [
+            path("", redirect_to_dashboard, name="index"),
             re_path(
-                r"^(?P<product_slug>[\w-]*)_(?P<pk>\d+)/$",
-                self.detail_view.as_view(),
-                name="detail",
+                r"^(?P<product_slug>[\w-]*)_(?P<pk>\d+)/$", 
+                redirect_to_dashboard, 
+                name="detail"
             ),
             re_path(
-                r"^category/(?P<category_slug>[\w-]+(/[\w-]+)*)_(?P<pk>\d+)/$",
-                self.category_view.as_view(),
-                name="category",
+                r"^category/(?P<category_slug>[\w-]+(/[\w-]+)*)_(?P<pk>\d+)/$", 
+                redirect_to_dashboard, 
+                name="category"
             ),
             re_path(
-                r"^ranges/(?P<slug>[\w-]+)/$", self.range_view.as_view(), name="range"
+                r"^ranges/(?P<slug>[\w-]+)/$", 
+                redirect_to_dashboard, 
+                name="range"
             ),
         ]
         return self.post_process_urls(urls)
