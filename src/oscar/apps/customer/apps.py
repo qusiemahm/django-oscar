@@ -100,205 +100,129 @@ class CustomerConfig(OscarConfig):
         )
 
     def get_urls(self):
-        urls = [
-            # Login, logout and register doesn't require login
-            path("login/", self.login_view.as_view(), name="login"),
-            path("logout/", self.logout_view.as_view(), name="logout"),
-            path("register/", self.register_view.as_view(), name="register"),
-            path("", login_required(self.summary_view.as_view()), name="summary"),
-            path(
-                "change-password/",
-                login_required(self.change_password_view.as_view()),
-                name="change-password",
-            ),
-            # Profile
-            path(
-                "profile/",
-                login_required(self.profile_view.as_view()),
-                name="profile-view",
-            ),
-            path(
-                "profile/edit/",
-                login_required(self.profile_update_view.as_view()),
-                name="profile-update",
-            ),
-            path(
-                "profile/delete/",
-                login_required(self.profile_delete_view.as_view()),
-                name="profile-delete",
-            ),
+        from django.shortcuts import redirect
+        from django.urls import path, re_path
+        from oscar.views.decorators import login_forbidden
+        from django.views.generic import RedirectView
 
+        def redirect_to_dashboard(request, *args, **kwargs):
+            return redirect('/dashboard/')
+
+        urls = [
+            # Login, logout, and register
+            path("login/", redirect_to_dashboard),
+            path("login/", self.login_view.as_view(), name="login"),
+            path("logout/", redirect_to_dashboard),
+            path("logout/", self.logout_view.as_view(), name="logout"),
+            path("register/", redirect_to_dashboard),
+            path("register/", self.register_view.as_view(), name="register"),
+            
+            # Summary
+            path("", redirect_to_dashboard),
+            path("", login_required(self.summary_view.as_view()), name="summary"),
+            
+            # Change password
+            path("change-password/", redirect_to_dashboard),
+            path("change-password/", login_required(self.change_password_view.as_view()), name="change-password"),
+            
+            # Profile
+            path("profile/", redirect_to_dashboard),
+            path("profile/", login_required(self.profile_view.as_view()), name="profile-view"),
+            path("profile/edit/", redirect_to_dashboard),
+            path("profile/edit/", login_required(self.profile_update_view.as_view()), name="profile-update"),
+            path("profile/delete/", redirect_to_dashboard),
+            path("profile/delete/", login_required(self.profile_delete_view.as_view()), name="profile-delete"),
+            
+            # Subscription
+            path("subscription/", redirect_to_dashboard),
+            path("subscription/", login_required(self.subscription_view.as_view()), name="subscription-view"),
+            path("subscription/cancel/", redirect_to_dashboard),
+            path("subscription/cancel/", login_required(self.cancel_subscription_view.as_view()), name="cancel-subscription-view"),
+            path("subscription/cancel/confirm/", redirect_to_dashboard),
+            path("subscription/cancel/confirm/", login_required(self.cancel_subscription.as_view()), name="cancel-subscription"),
+            path("subscription/reactivate/", redirect_to_dashboard),
+            path("subscription/reactivate/", login_required(self.reactivate_subscription_view.as_view()), name="reactivate-subscription-view"),
+            path("subscription/subscribe/", redirect_to_dashboard),
+            path("subscription/subscribe/", login_required(self.subscripe_view.as_view()), name="subscribe-view"),
+            path("subscription/change/", redirect_to_dashboard),
+            path("subscription/change/", login_required(self.change_subscription_view.as_view()), name="change-subscription-view"),
+            path("subscription/renew/", redirect_to_dashboard),
+            path("subscription/renew/", login_required(self.renew_subscription_view.as_view()), name="renew-subscription-view"),
+            
             # Order history
-            path(
-                "orders/",
-                login_required(self.order_history_view.as_view()),
-                name="order-list",
-            ),
-            re_path(
-                r"^order-status/(?P<order_number>[\w-]*)/(?P<hash>[A-z0-9-_=:]+)/$",
-                self.anon_order_detail_view.as_view(),
-                name="anon-order",
-            ),
-            path(
-                "orders/<str:order_number>/",
-                login_required(self.order_detail_view.as_view()),
-                name="order",
-            ),
-            path(
-                "orders/<str:order_number>/<int:line_id>/",
-                login_required(self.order_line_view.as_view()),
-                name="order-line",
-            ),
+            path("orders/", redirect_to_dashboard),
+            path("orders/", login_required(self.order_history_view.as_view()), name="order-list"),
+            re_path(r"^order-status/(?P<order_number>[\w-]*)/(?P<hash>[A-z0-9-_=:]+)/$", redirect_to_dashboard),
+            re_path(r"^order-status/(?P<order_number>[\w-]*)/(?P<hash>[A-z0-9-_=:]+)/$", self.anon_order_detail_view.as_view(), name="anon-order"),
+            path("orders/<str:order_number>/", redirect_to_dashboard),
+            path("orders/<str:order_number>/", login_required(self.order_detail_view.as_view()), name="order"),
+            path("orders/<str:order_number>/<int:line_id>/", redirect_to_dashboard),
+            path("orders/<str:order_number>/<int:line_id>/", login_required(self.order_line_view.as_view()), name="order-line"),
+            
             # Address book
-            path(
-                "addresses/",
-                login_required(self.address_list_view.as_view()),
-                name="address-list",
-            ),
-            path(
-                "addresses/add/",
-                login_required(self.address_create_view.as_view()),
-                name="address-create",
-            ),
-            path(
-                "addresses/<int:pk>/",
-                login_required(self.address_update_view.as_view()),
-                name="address-detail",
-            ),
-            path(
-                "addresses/<int:pk>/delete/",
-                login_required(self.address_delete_view.as_view()),
-                name="address-delete",
-            ),
-            re_path(
-                r"^addresses/(?P<pk>\d+)/(?P<action>default_for_(billing|shipping))/$",
-                login_required(self.address_change_status_view.as_view()),
-                name="address-change-status",
-            ),
+            path("addresses/", redirect_to_dashboard),
+            path("addresses/", login_required(self.address_list_view.as_view()), name="address-list"),
+            path("addresses/add/", redirect_to_dashboard),
+            path("addresses/add/", login_required(self.address_create_view.as_view()), name="address-create"),
+            path("addresses/<int:pk>/", redirect_to_dashboard),
+            path("addresses/<int:pk>/", login_required(self.address_update_view.as_view()), name="address-detail"),
+            path("addresses/<int:pk>/delete/", redirect_to_dashboard),
+            path("addresses/<int:pk>/delete/", login_required(self.address_delete_view.as_view()), name="address-delete"),
+            re_path(r"^addresses/(?P<pk>\d+)/(?P<action>default_for_(billing|shipping))/$", redirect_to_dashboard),
+            re_path(r"^addresses/(?P<pk>\d+)/(?P<action>default_for_(billing|shipping))/$", login_required(self.address_change_status_view.as_view()), name="address-change-status"),
+            
             # Email history
-            path(
-                "emails/",
-                login_required(self.email_list_view.as_view()),
-                name="email-list",
-            ),
-            path(
-                "emails/<int:email_id>/",
-                login_required(self.email_detail_view.as_view()),
-                name="email-detail",
-            ),
+            path("emails/", redirect_to_dashboard),
+            path("emails/", login_required(self.email_list_view.as_view()), name="email-list"),
+            path("emails/<int:email_id>/", redirect_to_dashboard),
+            path("emails/<int:email_id>/", login_required(self.email_detail_view.as_view()), name="email-detail"),
+            
             # Notifications
-            # Redirect to notification inbox
-            path(
-                "notifications/",
-                generic.RedirectView.as_view(
-                    url="/accounts/notifications/inbox/", permanent=False
-                ),
-            ),
-            path(
-                "notifications/inbox/",
-                login_required(self.notification_inbox_view.as_view()),
-                name="notifications-inbox",
-            ),
-            path(
-                "notifications/archive/",
-                login_required(self.notification_archive_view.as_view()),
-                name="notifications-archive",
-            ),
-            path(
-                "notifications/update/",
-                login_required(self.notification_update_view.as_view()),
-                name="notifications-update",
-            ),
-            path(
-                "notifications/<int:pk>/",
-                login_required(self.notification_detail_view.as_view()),
-                name="notifications-detail",
-            ),
+            path("notifications/", redirect_to_dashboard),
+            path("notifications/inbox/", redirect_to_dashboard),
+            path("notifications/inbox/", login_required(self.notification_inbox_view.as_view()), name="notifications-inbox"),
+            path("notifications/archive/", redirect_to_dashboard),
+            path("notifications/archive/", login_required(self.notification_archive_view.as_view()), name="notifications-archive"),
+            path("notifications/update/", redirect_to_dashboard),
+            path("notifications/update/", login_required(self.notification_update_view.as_view()), name="notifications-update"),
+            path("notifications/<int:pk>/", redirect_to_dashboard),
+            path("notifications/<int:pk>/", login_required(self.notification_detail_view.as_view()), name="notifications-detail"),
+            
             # Alerts
-            # Alerts can be setup by anonymous users: some views do not
-            # require login
-            path(
-                "alerts/",
-                login_required(self.alert_list_view.as_view()),
-                name="alerts-list",
-            ),
-            path(
-                "alerts/create/<int:pk>/",
-                self.alert_create_view.as_view(),
-                name="alert-create",
-            ),
-            path(
-                "alerts/confirm/<str:key>/",
-                self.alert_confirm_view.as_view(),
-                name="alerts-confirm",
-            ),
-            path(
-                "alerts/cancel/key/<str:key>/",
-                self.alert_cancel_view.as_view(),
-                name="alerts-cancel-by-key",
-            ),
-            path(
-                "alerts/cancel/<int:pk>/",
-                login_required(self.alert_cancel_view.as_view()),
-                name="alerts-cancel-by-pk",
-            ),
+            path("alerts/", redirect_to_dashboard),
+            path("alerts/", login_required(self.alert_list_view.as_view()), name="alerts-list"),
+            path("alerts/create/<int:pk>/", redirect_to_dashboard),
+            path("alerts/create/<int:pk>/", self.alert_create_view.as_view(), name="alert-create"),
+            path("alerts/confirm/<str:key>/", redirect_to_dashboard),
+            path("alerts/confirm/<str:key>/", self.alert_confirm_view.as_view(), name="alerts-confirm"),
+            path("alerts/cancel/key/<str:key>/", redirect_to_dashboard),
+            path("alerts/cancel/key/<str:key>/", self.alert_cancel_view.as_view(), name="alerts-cancel-by-key"),
+            path("alerts/cancel/<int:pk>/", redirect_to_dashboard),
+            path("alerts/cancel/<int:pk>/", login_required(self.alert_cancel_view.as_view()), name="alerts-cancel-by-pk"),
+            
             # Wishlists
-            path(
-                "wishlists/",
-                login_required(self.wishlists_list_view.as_view()),
-                name="wishlists-list",
-            ),
-            path(
-                "wishlists/add/<int:product_pk>/",
-                login_required(self.wishlists_add_product_view.as_view()),
-                name="wishlists-add-product",
-            ),
-            path(
-                "wishlists/<str:key>/add/<int:product_pk>/",
-                login_required(self.wishlists_add_product_view.as_view()),
-                name="wishlists-add-product",
-            ),
-            path(
-                "wishlists/create/",
-                login_required(self.wishlists_create_view.as_view()),
-                name="wishlists-create",
-            ),
-            path(
-                "wishlists/create/with-product/<int:product_pk>/",
-                login_required(self.wishlists_create_view.as_view()),
-                name="wishlists-create-with-product",
-            ),
-            # Wishlists can be publicly shared, no login required
-            path(
-                "wishlists/<str:key>/",
-                self.wishlists_detail_view.as_view(),
-                name="wishlists-detail",
-            ),
-            path(
-                "wishlists/<str:key>/update/",
-                login_required(self.wishlists_update_view.as_view()),
-                name="wishlists-update",
-            ),
-            path(
-                "wishlists/<str:key>/delete/",
-                login_required(self.wishlists_delete_view.as_view()),
-                name="wishlists-delete",
-            ),
-            path(
-                "wishlists/<str:key>/lines/<int:line_pk>/delete/",
-                login_required(self.wishlists_remove_product_view.as_view()),
-                name="wishlists-remove-product",
-            ),
-            path(
-                "wishlists/<str:key>/products/<int:product_pk>/delete/",
-                login_required(self.wishlists_remove_product_view.as_view()),
-                name="wishlists-remove-product",
-            ),
-            path(
-                "wishlists/<str:key>/lines/<int:line_pk>/move-to/<str:to_key>/",
-                login_required(self.wishlists_move_product_to_another_view.as_view()),
-                name="wishlists-move-product-to-another",
-            ),
+            path("wishlists/", redirect_to_dashboard),
+            path("wishlists/", login_required(self.wishlists_list_view.as_view()), name="wishlists-list"),
+            path("wishlists/add/<int:product_pk>/", redirect_to_dashboard),
+            path("wishlists/add/<int:product_pk>/", login_required(self.wishlists_add_product_view.as_view()), name="wishlists-add-product"),
+            path("wishlists/<str:key>/add/<int:product_pk>/", redirect_to_dashboard),
+            path("wishlists/<str:key>/add/<int:product_pk>/", login_required(self.wishlists_add_product_view.as_view()), name="wishlists-add-product"),
+            path("wishlists/create/", redirect_to_dashboard),
+            path("wishlists/create/", login_required(self.wishlists_create_view.as_view()), name="wishlists-create"),
+            path("wishlists/create/with-product/<int:product_pk>/", redirect_to_dashboard),
+            path("wishlists/create/with-product/<int:product_pk>/", login_required(self.wishlists_create_view.as_view()), name="wishlists-create-with-product"),
+            path("wishlists/<str:key>/", redirect_to_dashboard),
+            path("wishlists/<str:key>/", self.wishlists_detail_view.as_view(), name="wishlists-detail"),
+            path("wishlists/<str:key>/update/", redirect_to_dashboard),
+            path("wishlists/<str:key>/update/", login_required(self.wishlists_update_view.as_view()), name="wishlists-update"),
+            path("wishlists/<str:key>/delete/", redirect_to_dashboard),
+            path("wishlists/<str:key>/delete/", login_required(self.wishlists_delete_view.as_view()), name="wishlists-delete"),
+            path("wishlists/<str:key>/lines/<int:line_pk>/delete/", redirect_to_dashboard),
+            path("wishlists/<str:key>/lines/<int:line_pk>/delete/", login_required(self.wishlists_remove_product_view.as_view()), name="wishlists-remove-product"),
+            path("wishlists/<str:key>/products/<int:product_pk>/delete/", redirect_to_dashboard),
+            path("wishlists/<str:key>/products/<int:product_pk>/delete/", login_required(self.wishlists_remove_product_view.as_view()), name="wishlists-remove-product"),
+            path("wishlists/<str:key>/lines/<int:line_pk>/move-to/<str:to_key>/", redirect_to_dashboard),
+            path("wishlists/<str:key>/lines/<int:line_pk>/move-to/<str:to_key>/", login_required(self.wishlists_move_product_to_another_view.as_view()), name="wishlists-move-product-to-another"),
         ]
 
         return self.post_process_urls(urls)

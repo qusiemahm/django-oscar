@@ -30,22 +30,41 @@ class Shop(OscarConfig):
 
     def get_urls(self):
         from django.contrib.auth import views as auth_views
-
+        from django.shortcuts import redirect
         from oscar.views.decorators import login_forbidden
 
+        def redirect_to_dashboard(request, *args, **kwargs):
+            return redirect('/dashboard/')
+    
         urls = [
+            path("", redirect_to_dashboard),
             path("", RedirectView.as_view(url=settings.OSCAR_HOMEPAGE), name="home"),
+
+            path("catalogue/", redirect_to_dashboard),
             path("catalogue/", self.catalogue_app.urls),
+
+            path("basket/", redirect_to_dashboard),
             path("basket/", self.basket_app.urls),
+
+            path("checkout/", redirect_to_dashboard),
             path("checkout/", self.checkout_app.urls),
+            
+            path("accounts/", redirect_to_dashboard),
             path("accounts/", self.customer_app.urls),
+
+            path("search/", redirect_to_dashboard),
             path("search/", self.search_app.urls),
             # path("dashboard/", self.dashboard_app.urls),
+
+            path("offers/", redirect_to_dashboard),
             path("offers/", self.offer_app.urls),
+
+            path("wishlists/", redirect_to_dashboard),
             path("wishlists/", self.wishlists_app.urls),
             # Password reset - as we're using Django's default view functions,
             # we can't namespace these urls as that prevents
             # the reverse function from working.
+            path("password-reset/", redirect_to_dashboard),
             path(
                 "password-reset/",
                 login_forbidden(
@@ -57,6 +76,8 @@ class Shop(OscarConfig):
                 ),
                 name="password-reset",
             ),
+            
+            path("password-reset/done/", redirect_to_dashboard),
             path(
                 "password-reset/done/",
                 login_forbidden(
@@ -66,6 +87,8 @@ class Shop(OscarConfig):
                 ),
                 name="password-reset-done",
             ),
+
+            path("password-reset/confirm/<str:uidb64>/<str:token>/", redirect_to_dashboard),
             path(
                 "password-reset/confirm/<str:uidb64>/<str:token>/",
                 login_forbidden(
@@ -77,6 +100,8 @@ class Shop(OscarConfig):
                 ),
                 name="password-reset-confirm",
             ),
+
+            path("password-reset/complete/", redirect_to_dashboard),
             path(
                 "password-reset/complete/",
                 login_forbidden(
