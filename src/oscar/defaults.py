@@ -127,10 +127,10 @@ OSCAR_DASHBOARD_NAVIGATION = [
                 </svg>
                  ''',
         "children": [
-            # {
-            #     "label": _("Products"),
-            #     "url_name": "dashboard:catalogue-product-list",
-            # },
+            {
+                "label": _("Products"),
+                "url_name": "dashboard:catalogue-product-list",
+            },
             # {
             #     "label": _("Product Types"),
             #     "url_name": "dashboard:catalogue-class-list",
@@ -143,10 +143,10 @@ OSCAR_DASHBOARD_NAVIGATION = [
             #     "label": _("Ranges"),
             #     "url_name": "dashboard:range-list",
             # },
-            # {
-            #     "label": _("Low stock alerts"),
-            #     "url_name": "dashboard:stock-alert-list",
-            # },
+            {
+                "label": _("Low stock alerts"),
+                "url_name": "dashboard:stock-alert-list",
+            },
             # {
             #     "label": _("Options"),
             #     "url_name": "dashboard:catalogue-option-list",
