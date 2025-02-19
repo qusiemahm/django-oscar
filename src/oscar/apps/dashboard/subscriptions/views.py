@@ -24,6 +24,7 @@ from plans.signals import activate_user_plan
 from plans.plan_change import StandardPlanChangePolicy
 from server.apps.payments.gateways.tap import TapPaymentGateway
 from plans.models import Order as PlansOrder
+from plans.base.models import UserPlanCancellationReason
 
 
 class SubscriptionsListView(generic.TemplateView):
@@ -47,32 +48,47 @@ class SubscriptionsListView(generic.TemplateView):
             ctx["current_plan"] = user.userplan.plan
             ctx["students_count"] = user.userplan.students
             ctx["branches_count"] = user.userplan.branches
+            ctx["current_plan_paid"] = user.userplan.paid
             ctx["current_plan_active"] = user.userplan.is_active()
             ctx["current_plan_trial"] = user.userplan.is_trial()
-            ctx["current_plan_trial_end_date"] =user.userplan.trial_end_date
+            ctx["current_plan_trial_end_date"] = user.userplan.trial_end_date
             ctx["current_plan_expired"] = user.userplan.is_expired()
+            ctx["current_plan_canceled"] = user.userplan.is_canceled()
+            ctx["current_plan_canceled_date"] = user.userplan.canceled_date
             ctx["expiration_date"] = user.userplan.expire
         except:
             ctx["current_plan"] = None
         return ctx
 
 
-class CancelSubscriptionView(generic.TemplateView):
-    template_name = "oscar/dashboard/subscription/cancel-subscription.html"
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx["action"] = reverse_lazy("dashboard:cancel-subscription")
-        ctx["dashboard"] = True
-        try:
-            ctx["current_plan"] = Plan.get_current_plan(self.request.user)
-            ctx["expiration_date"] = self.request.user.userplan.expire
-        except:
-            ctx["current_plan"] = None
-        return ctx
-
-
 class CancelSubscriptionForm(forms.Form):
+    # Adding a fixed choice "Others"
+    OTHER_REASON = "other"
+
+    cancellation_reason = forms.ChoiceField(
+        choices=[("", ("Select a reason"))]
+        + [
+            (cancellation_reason.id, cancellation_reason.reason)
+            for cancellation_reason in UserPlanCancellationReason.objects.filter(
+                hidden=False
+            )
+        ]
+        + [(OTHER_REASON, _("Other"))],  # Adding "Other" option
+        required=True,
+        label=_("Cancellation Reason"),
+    )
+    custom_reason = forms.CharField(
+        max_length=256,
+        required=False,
+        label=_("Specify reason"),
+        help_text=_("If your reason is not listed, please specify."),
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "placeholder": _("Please specify your reason here."),
+            }
+        ),
+    )
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -80,13 +96,12 @@ class CancelSubscriptionForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
+        cancellation_reason = cleaned_data.get("cancellation_reason")
+        custom_reason = cleaned_data.get("custom_reason")
 
-        try:
-            user_plan = Plan.get_current_plan(self.user)
-        except:
-            raise forms.ValidationError(
-                _("You don't have an active subscription to cancel.")
-            )
+        # If "Others" is selected, ensure the custom reason is provided
+        if cancellation_reason == self.OTHER_REASON and not custom_reason:
+            raise forms.ValidationError(_("Please provide your custom reason."))
 
         return cleaned_data
 
@@ -104,6 +119,10 @@ class CancelSubscription(generic.FormView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["dashboard"] = True
+        # Don't assign the form class itself, instantiate it instead
+        ctx["form"] = self.get_form()
+
+        # Add the current subscription plan and expiration date
         try:
             user_plan = Plan.get_current_plan(self.request.user)
             ctx["current_plan"] = user_plan
@@ -111,18 +130,23 @@ class CancelSubscription(generic.FormView):
         except UserPlan.DoesNotExist:
             ctx["current_plan"] = None
             ctx["expiration_date"] = None
-        return ctx
 
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        return self.form_invalid(form)
+        return ctx
 
     def form_valid(self, form):
         try:
+            cancellation_reason = form.cleaned_data["cancellation_reason"]
+            custom_reason = form.cleaned_data.get("custom_reason")
+            current_plan = self.request.user.userplan
+            # Log or save the cancellation reason
+            if custom_reason:
+                current_plan.cancellation_reason = (
+                    UserPlanCancellationReason.objects.create(reason=custom_reason)
+                )
+            else:
+                current_plan.cancellation_reason_id = int(cancellation_reason)
             # Cancel the subscription
-            self.request.user.userplan.deactivate()
+            current_plan.cancel()  # will call save()
 
             messages.success(
                 self.request, _("Your subscription has been successfully cancelled.")
@@ -135,6 +159,7 @@ class CancelSubscription(generic.FormView):
             )
             return redirect("dashboard:subscription-view")
         except Exception as e:
+            print(e)
             messages.error(
                 self.request,
                 _(
@@ -142,8 +167,6 @@ class CancelSubscription(generic.FormView):
                 ),
             )
             return self.form_invalid(form)
-
-        return super().form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -160,14 +183,22 @@ class ReactivateSubscriptionForm(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
         try:
-            user_plan = Plan.get_current_plan(self.user)
-            if user_plan.is_expired():
-                raise forms.ValidationError(
-                    _("The reactivation period expired.")
-                )
-        except:
+            user_plan = self.user.userplan
+            if user_plan.is_canceled():  # Ensure the subscription was canceled
+                if user_plan.is_expired():  # Check if the plan is expired
+                    raise forms.ValidationError(
+                        _(
+                            "The subscription plan has expired. Reactivation is not possible."
+                        )
+                    )
+                if not user_plan.is_trial():  # Check if the trial period is expired
+                    raise forms.ValidationError(
+                        _("The trial period has expired. Reactivation is not possible.")
+                    )
+
+        except UserPlan.DoesNotExist:
             raise forms.ValidationError(
-                _("You don't have canceled subscription to activate.")
+                _("You don't have a canceled subscription to activate.")
             )
 
         return cleaned_data
@@ -204,7 +235,9 @@ class ReactivateSubscriptionView(generic.FormView):
     def form_valid(self, form):
         try:
             # Cancel the subscription
-            self.request.user.userplan.activate()
+            self.request.user.userplan.canceled_date = None
+            self.request.user.userplan.cancellation_reason = None
+            self.request.user.userplan.save()
 
             messages.success(
                 self.request, _("Your subscription has been successfully Activated.")
@@ -314,7 +347,7 @@ class SubscribeView(generic.View):
             ).first()
 
             if existing_plan:
-                existing_plan.plan = plan 
+                existing_plan.plan = plan
                 existing_plan.save()
             else:
                 UserPlan.objects.create(
@@ -354,7 +387,7 @@ class SubscribeView(generic.View):
             )
         redirect_url = self.success_url
         if authorize:
-            redirect_url = f"{redirect_url}?authorize=1" 
+            redirect_url = f"{redirect_url}?authorize=1"
         return redirect(redirect_url)
 
     def dispatch(self, request, *args, **kwargs):
@@ -426,6 +459,8 @@ class ChangeSubscriptionView(generic.View):
                     new_plan,
                     days_left,
                 ),
+                "current_plan_trial": current_plan.is_trial(),
+                "current_plan_trial_end_date": current_plan.trial_end_date,
             }
         except UserPlan.DoesNotExist:
             context.update({"current_plan": None, "expiration_date": None})
@@ -449,6 +484,17 @@ class ChangeSubscriptionView(generic.View):
                 messages.error(request, _("This is already your current plan."))
                 return redirect(self.success_url)
 
+            if current_plan.is_trial():
+                current_plan.plan = new_plan
+                current_plan.save()
+                messages.success(
+                    request,
+                    _("Successfully changed to plan {} for {} branches").format(
+                        new_plan.name, current_plan.branches
+                    ),
+                )
+                return redirect(self.success_url)
+
             if not total_price:
                 current_plan.extend_account(new_plan, None)
                 current_plan.save()
@@ -459,10 +505,6 @@ class ChangeSubscriptionView(generic.View):
                     ),
                 )
             else:
-                # Here you would typically:
-                # 1. Create an order for the total_change_price amount
-                # 2. Redirect to payment
-                # For this example, we'll assume immediate payment success
                 gateway = TapPaymentGateway()
                 user = self.request.user
                 # Create django-plans order
@@ -535,58 +577,65 @@ class UpdateBranchesView(generic.View):
         total_price = float(request.POST.get("total_price"))
 
         current_plan = request.user.userplan
-
-        try:
-            if total_price > 0:
-                # Charge the user for additional costs
-                gateway = TapPaymentGateway()
-                user = request.user
-
-                # Create a new order
-                plans_order = PlansOrder.objects.create(
-                    user=user,
-                    plan=current_plan.plan,
-                    amount=total_price,
-                    branches_number=current_plan.branches,
-                    students_number=current_plan.students,
-                    currency=settings.PLANS_CURRENCY,
-                )
-
-                # Create Tap charge
-                tap_response = gateway.create_charge(
-                    user=user,
-                    order_number=plans_order.pk,
-                    amount=float(plans_order.amount),
-                    customer=self.get_customer_data(),
-                    redirect_url=f"{self.get_redirect_url()}?update_plan_id={current_plan.pk}",
-                    save_card=True,
-                    metadata={
-                        "additional_branches": branches,
-                        "additional_students": students,
-                        "additional_branches_price": float(
-                            current_plan.plan.price() * branches
-                        ),
-                        "additional_students_price": float(
-                            current_plan.plan.price_per_student * students
-                        ),
-                    },
-                )
-                # Get the redirect URL and redirect the user
-                redirect_url = gateway.get_redirect_url(tap_response)
-                return HttpResponseRedirect(redirect_url)
-
+        if current_plan.is_trial():
+            current_plan.students = current_plan.students + students
+            current_plan.branches = current_plan.branches + branches
+            current_plan.save()
             messages.success(
                 request, _("Your subscription has been updated successfully.")
             )
+        else:
+            try:
+                if total_price > 0:
+                    # Charge the user for additional costs
+                    gateway = TapPaymentGateway()
+                    user = request.user
 
-        except Exception as e:
-            messages.error(
-                request,
-                _(
-                    "An error occurred while updating your subscription. Please try again."
-                ),
-            )
-            print(e)
+                    # Create a new order
+                    plans_order = PlansOrder.objects.create(
+                        user=user,
+                        plan=current_plan.plan,
+                        amount=total_price,
+                        branches_number=current_plan.branches,
+                        students_number=current_plan.students,
+                        currency=settings.PLANS_CURRENCY,
+                    )
+
+                    # Create Tap charge
+                    tap_response = gateway.create_charge(
+                        user=user,
+                        order_number=plans_order.pk,
+                        amount=float(plans_order.amount),
+                        customer=self.get_customer_data(),
+                        redirect_url=f"{self.get_redirect_url()}?update_plan_id={current_plan.pk}",
+                        save_card=True,
+                        metadata={
+                            "additional_branches": branches,
+                            "additional_students": students,
+                            "additional_branches_price": float(
+                                current_plan.plan.price() * branches
+                            ),
+                            "additional_students_price": float(
+                                current_plan.plan.price_per_student * students
+                            ),
+                        },
+                    )
+                    # Get the redirect URL and redirect the user
+                    redirect_url = gateway.get_redirect_url(tap_response)
+                    return HttpResponseRedirect(redirect_url)
+
+                messages.success(
+                    request, _("Your subscription has been updated successfully.")
+                )
+
+            except Exception as e:
+                messages.error(
+                    request,
+                    _(
+                        "An error occurred while updating your subscription. Please try again."
+                    ),
+                )
+                print(e)
 
         return redirect(self.success_url)
 

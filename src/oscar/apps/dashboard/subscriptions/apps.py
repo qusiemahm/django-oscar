@@ -13,7 +13,7 @@ class SubscriptionsDashboardConfig(OscarDashboardConfig):
     # pylint: disable=attribute-defined-outside-init
     def ready(self):
         self.subscription_view = get_class("dashboard.subscriptions.views", "SubscriptionsListView")
-        self.cancel_subscription_view = get_class("dashboard.subscriptions.views", "CancelSubscriptionView")
+        self.cancel_subscription_view = get_class("dashboard.subscriptions.views", "CancelSubscription")
         self.cancel_subscription = get_class(
             "dashboard.subscriptions.views", "CancelSubscription"
         )
