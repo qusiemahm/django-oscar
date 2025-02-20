@@ -65,18 +65,18 @@ class CancelSubscriptionForm(forms.Form):
     # Adding a fixed choice "Others"
     OTHER_REASON = "other"
 
-    # cancellation_reason = forms.ChoiceField(
-    #     choices=[("", ("Select a reason"))]
-    #     + [
-    #         (cancellation_reason.id, cancellation_reason.reason)
-    #         for cancellation_reason in UserPlanCancellationReason.objects.filter(
-    #             hidden=False
-    #         )
-    #     ]
-    #     + [(OTHER_REASON, _("Other"))],  # Adding "Other" option
-    #     required=True,
-    #     label=_("Cancellation Reason"),
-    # )
+    cancellation_reason = forms.ChoiceField(
+        choices=[("", ("Select a reason"))]
+        + [
+            (cancellation_reason.id, cancellation_reason.reason)
+            for cancellation_reason in UserPlanCancellationReason.objects.filter(
+                hidden=False
+            )
+        ]
+        + [(OTHER_REASON, _("Other"))],  # Adding "Other" option
+        required=True,
+        label=_("Cancellation Reason"),
+    )
     custom_reason = forms.CharField(
         max_length=256,
         required=False,
