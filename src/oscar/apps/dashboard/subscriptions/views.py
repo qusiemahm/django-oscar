@@ -66,14 +66,7 @@ class CancelSubscriptionForm(forms.Form):
     OTHER_REASON = "other"
 
     cancellation_reason = forms.ChoiceField(
-        choices=[("", ("Select a reason"))]
-        + [
-            (cancellation_reason.id, cancellation_reason.reason)
-            for cancellation_reason in UserPlanCancellationReason.objects.filter(
-                hidden=False
-            )
-        ]
-        + [(OTHER_REASON, _("Other"))],  # Adding "Other" option
+        choices=[],  # Empty choices, will be populated in __init__
         required=True,
         label=_("Cancellation Reason"),
     )
@@ -93,6 +86,18 @@ class CancelSubscriptionForm(forms.Form):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
+
+        # Dynamically set the choices for cancellation_reason
+        self.fields["cancellation_reason"].choices = (
+            [("", _("Select a reason"))]
+            + [
+                (cancellation_reason.id, cancellation_reason.reason)
+                for cancellation_reason in UserPlanCancellationReason.objects.filter(
+                    hidden=False
+                )
+            ]
+            + [(self.OTHER_REASON, _("Other"))]  # Adding "Other" option
+        )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -174,91 +179,66 @@ class CancelSubscription(generic.FormView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class ReactivateSubscriptionForm(forms.Form):
-
-    def __init__(self, user, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.user = user
-
-    def clean(self):
-        cleaned_data = super().clean()
-        try:
-            user_plan = self.user.userplan
-            if user_plan.is_canceled():  # Ensure the subscription was canceled
-                if user_plan.is_expired():  # Check if the plan is expired
-                    raise forms.ValidationError(
-                        _(
-                            "The subscription plan has expired. Reactivation is not possible."
-                        )
-                    )
-                if not user_plan.is_trial():  # Check if the trial period is expired
-                    raise forms.ValidationError(
-                        _("The trial period has expired. Reactivation is not possible.")
-                    )
-
-        except UserPlan.DoesNotExist:
-            raise forms.ValidationError(
-                _("You don't have a canceled subscription to activate.")
-            )
-
-        return cleaned_data
-
-
-class ReactivateSubscriptionView(generic.FormView):
-    template_name = "oscar/dashboard/subscription/subscription.html"
-    form_class = ReactivateSubscriptionForm
+class ReactivateSubscriptionView(generic.View):
     success_url = reverse_lazy("dashboard:subscription-view")
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
-        return kwargs
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx["dashboard"] = True
-        try:
-            user_plan = Plan.get_current_plan(self.request.user)
-            ctx["current_plan"] = user_plan
-            ctx["expiration_date"] = self.request.user.userplan.expire
-        except UserPlan.DoesNotExist:
-            ctx["current_plan"] = None
-            ctx["expiration_date"] = None
-        return ctx
-
     def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        return self.form_invalid(form)
+        user = request.user
 
-    def form_valid(self, form):
         try:
-            # Cancel the subscription
-            self.request.user.userplan.canceled_date = None
-            self.request.user.userplan.cancellation_reason = None
-            self.request.user.userplan.save()
+            user_plan = user.userplan
+
+            # Ensure the subscription was canceled
+            if not user_plan.is_canceled():
+                messages.error(
+                    request,
+                    _("You don't have a canceled subscription to activate."),
+                )
+                return redirect(self.success_url)
+
+            # Check if the plan is expired
+            if user_plan.is_expired() and user_plan.paid:
+                messages.error(
+                    request,
+                    _(
+                        "The subscription plan has expired. Reactivation is not possible."
+                    ),
+                )
+                return redirect(self.success_url)
+
+            # Check if the trial period is expired
+            if not user_plan.is_trial() and not user_plan.paid:
+                messages.error(
+                    request,
+                    _("The trial period has expired. Reactivation is not possible."),
+                )
+                return redirect(self.success_url)
+
+            # Reactivate the subscription
+            user_plan.canceled_date = None
+            user_plan.cancellation_reason = None
+            user_plan.save()
 
             messages.success(
-                self.request, _("Your subscription has been successfully Activated.")
+                request, _("Your subscription has been successfully activated.")
             )
-            return redirect(self.get_success_url())
+            return redirect(self.success_url)
+
         except UserPlan.DoesNotExist:
             messages.error(
-                self.request,
+                request,
                 _("Unable to reactivate subscription. No subscription found."),
             )
-            return redirect("dashboard:subscription-view")
+            return redirect(self.success_url)
+
         except Exception as e:
             messages.error(
-                self.request,
+                request,
                 _(
                     "An error occurred while activating your subscription. Please try again."
                 ),
             )
-            return self.form_invalid(form)
-
-        return super().form_valid(form)
+            return redirect(self.success_url)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:

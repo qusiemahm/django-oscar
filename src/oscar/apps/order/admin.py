@@ -39,14 +39,14 @@ class OrderAdmin(admin.ModelAdmin):
         "billing_address",
         "date_placed",
     )
-    readonly_fields = (
-        "number",
-        "basket",
-        "total_incl_tax",
-        "total_excl_tax",
-        "shipping_incl_tax",
-        "shipping_excl_tax",
-    )
+    # readonly_fields = (
+    #     "number",
+    #     "basket",
+    #     "total_incl_tax",
+    #     "total_excl_tax",
+    #     "shipping_incl_tax",
+    #     "shipping_excl_tax",
+    # )
     inlines = [LineInline]
 
 

@@ -527,14 +527,14 @@ class AbstractLine(models.Model):
     # the data for reporting).  We also store the partner name in case the
     # partner gets deleted at a later date.
 
-    partner = models.ForeignKey(
-        "partner.Partner",
-        related_name="order_lines",
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        verbose_name=_("Partner"),
-    )
+    # partner = models.ForeignKey(
+    #     "partner.Partner",
+    #     related_name="order_lines",
+    #     blank=True,
+    #     null=True,
+    #     on_delete=models.SET_NULL,
+    #     verbose_name=_("Partner"),
+    # )
     partner_name = models.CharField(_("Partner name"), max_length=128, blank=True)
     partner_sku = models.CharField(_("Partner SKU"), max_length=128)
 
