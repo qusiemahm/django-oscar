@@ -281,7 +281,7 @@ class SubscribeView(generic.View):
         else:
             vendor = user.vendor
             branches_count = (
-                school.business_details.branches_count
+                vendor.business_details.branches_count
                 if hasattr(vendor, "business_details")
                 else 1
             )
@@ -291,7 +291,7 @@ class SubscribeView(generic.View):
             "plan": plan,
             "currency": settings.PLANS_CURRENCY,
             "dashboard": True,
-            "school_reg": True,
+            "school_reg": True if hasattr(user, "school") else False,
             "students_count": students_count,
             "branches_count": branches_count,
             "students_total": plan.price_per_student * students_count,
@@ -409,7 +409,7 @@ class ChangeSubscriptionView(generic.View):
                 "new_plan": new_plan,
                 "currency": settings.PLANS_CURRENCY,
                 "dashboard": True,
-                "school_reg": True,
+                "school_reg": True if hasattr(user, "school") else False,
                 "students_count": students_count,
                 "branches_count": branches_count,
                 "old_students_total": current_plan.plan.price_per_student
@@ -553,7 +553,7 @@ class UpdateBranchesView(generic.View):
 
     def post(self, request, *args, **kwargs):
         branches = int(request.POST.get("branches"))
-        students = int(request.POST.get("students"))
+        students = int(request.POST.get("students", 0))
         total_price = float(request.POST.get("total_price"))
 
         current_plan = request.user.userplan
