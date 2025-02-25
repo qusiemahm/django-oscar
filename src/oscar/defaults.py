@@ -33,12 +33,12 @@ OSCAR_MISSING_IMAGE_URL = "image_not_found.jpg"
 
 # Address settings
 OSCAR_REQUIRED_ADDRESS_FIELDS = (
-    "first_name",
-    "last_name",
+    "address_name",
     "line1",
-    # "line4",
+    "phone_number",
+    # "phone_number",
     # "postcode",
-    "country",
+    # "country",
 )
 
 # Pagination settings

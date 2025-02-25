@@ -30,7 +30,6 @@ class UserAddressForm(PhoneNumberMixin, AbstractAddressForm):
             "line4",
             "state",
             "postcode",
-            "country",
             "phone_number",
             "notes",
         ]
