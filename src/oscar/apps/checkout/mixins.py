@@ -159,10 +159,13 @@ class OrderPlacementMixin(CheckoutSessionMixin):
         else:
             request = kwargs.pop("request")
 
+        store = basket.branch if basket.branch else None
+
         order = OrderCreator().place_order(
             user=user,
             order_number=order_number,
             basket=basket,
+            store=store,
             shipping_address=shipping_address,
             shipping_method=shipping_method,
             shipping_charge=shipping_charge,
