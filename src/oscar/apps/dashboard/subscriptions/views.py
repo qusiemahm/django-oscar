@@ -25,7 +25,7 @@ from plans.plan_change import StandardPlanChangePolicy
 from server.apps.payments.gateways.tap import TapPaymentGateway
 from plans.models import Order as PlansOrder
 from plans.base.models import UserPlanCancellationReason
-
+from server.apps.main.models import SyetemConfiguration
 
 class SubscriptionsListView(generic.TemplateView):
     template_name = "oscar/dashboard/subscription/subscription.html"
@@ -35,6 +35,7 @@ class SubscriptionsListView(generic.TemplateView):
         ctx = super().get_context_data(**kwargs)
         ctx["dashboard"] = True
         ctx["currency"] = settings.PLANS_CURRENCY
+        ctx["first_time_subscription_fee"] = SyetemConfiguration.get_solo().FIRST_TIME_SUBSCRIPTION_FEE
         if hasattr(user, "vendor"):
             ctx["available_plans"] = Plan.objects.filter(
                 available=True, plan_for="vendors"
@@ -287,6 +288,7 @@ class SubscribeView(generic.View):
             )
             students_count = 0
         authorize = self.request.GET.get("authorize", None)
+        first_time_fees = self.request.GET.get("first_time_fees", None)
         return {
             "plan": plan,
             "currency": settings.PLANS_CURRENCY,
@@ -299,6 +301,7 @@ class SubscribeView(generic.View):
             "total_price": (plan.price_per_student * students_count)
             + (plan.price() * branches_count),
             "authorize": authorize,
+            "first_time_fees": first_time_fees,
         }
 
     def post(self, request, *args, **kwargs):
@@ -306,6 +309,7 @@ class SubscribeView(generic.View):
         authorize = request.POST.get("authorize", 0)
         branches = int(request.POST.get("branches", 1))
         students = int(request.POST.get("students", 1))
+        first_time_fees = float(request.POST.get("first_time_fees", 0))
         if not plan_id:
             messages.error(request, _("No plan selected."))
             return redirect(self.success_url)
@@ -367,7 +371,9 @@ class SubscribeView(generic.View):
             )
         redirect_url = self.success_url
         if authorize:
-            redirect_url = f"{redirect_url}?authorize=1"
+            redirect_url = f"{redirect_url}?authorize=1&first_time_fees={first_time_fees}"
+        elif first_time_fees:
+            redirect_url = f"{redirect_url}?first_time_fees={first_time_fees}"
         return redirect(redirect_url)
 
     def dispatch(self, request, *args, **kwargs):
