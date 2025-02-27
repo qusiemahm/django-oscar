@@ -25,7 +25,7 @@ from plans.plan_change import StandardPlanChangePolicy
 from server.apps.payments.gateways.tap import TapPaymentGateway
 from plans.models import Order as PlansOrder
 from plans.base.models import UserPlanCancellationReason
-from server.apps.main.models import SyetemConfiguration
+from server.apps.main.models import SystemConfiguration
 
 class SubscriptionsListView(generic.TemplateView):
     template_name = "oscar/dashboard/subscription/subscription.html"
@@ -35,7 +35,7 @@ class SubscriptionsListView(generic.TemplateView):
         ctx = super().get_context_data(**kwargs)
         ctx["dashboard"] = True
         ctx["currency"] = settings.PLANS_CURRENCY
-        ctx["first_time_subscription_fee"] = SyetemConfiguration.get_solo().FIRST_TIME_SUBSCRIPTION_FEE
+        ctx["first_time_subscription_fee"] = SystemConfiguration.get_solo().FIRST_TIME_SUBSCRIPTION_FEE
         if hasattr(user, "vendor"):
             ctx["available_plans"] = Plan.objects.filter(
                 available=True, plan_for="vendors"
