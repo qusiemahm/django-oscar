@@ -20,6 +20,8 @@ from oscar.core.compat import AUTH_USER_MODEL
 from oscar.core.loading import get_model
 from oscar.core.utils import get_default_currency
 from oscar.models.fields import AutoSlugField
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 from . import exceptions
 
@@ -32,7 +34,7 @@ class AbstractOrder(models.Model):
     """
 
     number = models.CharField(
-        _("Order number"), max_length=128, db_index=True, unique=True
+        _("Order number"), max_length=128, db_index=True, unique=True, editable=False,
     )
 
     # We track the site that each order is placed within
@@ -140,16 +142,18 @@ class AbstractOrder(models.Model):
     def set_status(self, new_status):
         """
         Set a new status for this order.
-
-        If the requested status is not valid, then ``InvalidOrderStatus`` is
-        raised.
         """
+        print(f"🔍 set_status called with new_status: {new_status}")  # Debug print
+        
         if new_status == self.status:
+            print("⏭️ Status unchanged, returning early")  # Debug print
             return
 
         old_status = self.status
+        print(f"📊 Current status: {old_status}")  # Debug print
 
         if new_status not in self.available_statuses():
+            print(f"❌ Invalid status transition attempted: {new_status}")  # Debug print
             raise exceptions.InvalidOrderStatus(
                 _(
                     "'%(new_status)s' is not a valid status for order %(number)s"
@@ -161,8 +165,10 @@ class AbstractOrder(models.Model):
                     "status": self.status,
                 }
             )
+        
         self.status = new_status
         if new_status in self.cascade:
+            print(f"📝 Cascading status change to lines: {new_status}")  # Debug print
             new_line_status = self.cascade[new_status]
             for line in self.lines.all():
                 if new_line_status in line.available_statuses():
@@ -170,7 +176,7 @@ class AbstractOrder(models.Model):
                     line.save()
         self.save()
 
-        # Send signal for handling status changed
+        print("🔔 Sending order_status_changed signal")  # Debug print
         order_status_changed.send(
             sender=self,
             order=self,
@@ -180,7 +186,46 @@ class AbstractOrder(models.Model):
 
         self._create_order_status_change(old_status, new_status)
 
+        print(f"🌐 Calling notify_vendor_websocket with status: {new_status}")  # Debug print
+        self.notify_vendor_websocket(new_status)
+
     set_status.alters_data = True
+
+    def notify_vendor_websocket(self, new_status):
+        """Send WebSocket notification to vendor when order is waiting approval."""
+        print("🔄 Starting notify_vendor_websocket")  # Debug print
+        
+        try:
+            print("📡 Getting channel layer")  # Debug print
+            channel_layer = get_channel_layer()
+            
+            if not channel_layer:
+                print("❌ Channel layer is None")  # Debug print
+                return
+            
+            print(f"👤 User ID: {self.store.vendor.user.id if self.user else 'No user'}")  # Debug print
+            print(f"📦 Order number: {self.number}")  # Debug print
+            
+            group_name = f"vendor_{self.store.vendor.user.id if self.store.vendor.user.id else 'unknown'}"
+            print(f"�� Group name: {group_name}")  # Debug print
+            
+            message = {
+                "type": "send_order_notification",
+                "message": f"New order {self.number} is waiting for approval.",
+            }
+            print(f"📨 Preparing to send message: {message}")  # Debug print
+            
+            async_to_sync(channel_layer.group_send)(
+                group_name,
+                message
+            )
+            print("✅ WebSocket notification sent successfully")  # Debug print
+            
+        except Exception as e:
+            print(f"❌ Error in notify_vendor_websocket: {str(e)}")  # Debug print
+            print(f"Error type: {type(e)}")  # Debug print
+            import traceback
+            print(f"Traceback: {traceback.format_exc()}")  # Debug print
 
     def _create_order_status_change(self, old_status, new_status):
         # Not setting the status on the order as that should be handled before
