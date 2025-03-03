@@ -55,11 +55,16 @@ def queryset_orders_for_user(user):
     if user.is_staff:
         return queryset
     else:
-        partners = Partner._default_manager.filter(users=user)
-        return queryset.filter(lines__partner__in=partners).distinct()
+        # Restrict to orders associated with the logged-in vendor user
+        # i.e. store__vendor__user == current user
+        return queryset.filter(store__vendor__user=user).distinct()
 
 
 def get_order_for_user_or_404(user, number):
+    """
+    Fetch a single order by its number,
+    ensuring the current user has permission to access it.
+    """
     try:
         return queryset_orders_for_user(user).get(number=number)
     except ObjectDoesNotExist:

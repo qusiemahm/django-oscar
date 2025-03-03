@@ -138,58 +138,87 @@ class AbstractOrder(models.Model):
         Return all possible statuses that this order can move to
         """
         return self.pipeline.get(self.status, ())
-
+    
     def set_status(self, new_status):
         """
         Set a new status for this order.
         """
-        print(f"🔍 set_status called with new_status: {new_status}")  # Debug print
-        
-        if new_status == self.status:
-            print("⏭️ Status unchanged, returning early")  # Debug print
-            return
+        # if new_status == self.status:
+        #     print("asdasdassdasdasdasdasdadas")
+        #     logger.info(f"⏭️ Order {self.number}: Status unchanged ({new_status}), skipping update.")
+        #     return
 
         old_status = self.status
-        print(f"📊 Current status: {old_status}")  # Debug print
+        logger.info(f"📊 Order {self.number}: Changing status from {old_status} to {new_status}")
 
-        if new_status not in self.available_statuses():
-            print(f"❌ Invalid status transition attempted: {new_status}")  # Debug print
-            raise exceptions.InvalidOrderStatus(
-                _(
-                    "'%(new_status)s' is not a valid status for order %(number)s"
-                    " (current status: '%(status)s')"
-                )
-                % {
-                    "new_status": new_status,
-                    "number": self.number,
-                    "status": self.status,
-                }
-            )
-        
-        self.status = new_status
-        if new_status in self.cascade:
-            print(f"📝 Cascading status change to lines: {new_status}")  # Debug print
-            new_line_status = self.cascade[new_status]
-            for line in self.lines.all():
-                if new_line_status in line.available_statuses():
-                    line.status = new_line_status
-                    line.save()
+        # if new_status not in self.available_statuses():
+        #     logger.error(f"❌ Invalid status transition: {new_status} for order {self.number}")
+        #     raise exceptions.InvalidOrderStatus(
+        #         _(
+        #             "'%(new_status)s' is not a valid status for order %(number)s"
+        #             " (current status: '%(status)s')"
+        #         )
+        #         % {"new_status": new_status, "number": self.number, "status": self.status}
+        #     )
+
+        # Update order status
+        # self.status = new_status
         self.save()
 
-        print("🔔 Sending order_status_changed signal")  # Debug print
-        order_status_changed.send(
-            sender=self,
-            order=self,
-            old_status=old_status,
-            new_status=new_status,
-        )
+        # Notify the user via WebSocket
+        self.notify_user_websocket(new_status)
 
-        self._create_order_status_change(old_status, new_status)
+        logger.info(f"✅ Order {self.number}: Status updated to {new_status} and WebSocket user notified.")
 
-        print(f"🌐 Calling notify_vendor_websocket with status: {new_status}")  # Debug print
-        self.notify_vendor_websocket(new_status)
 
     set_status.alters_data = True
+
+    def notify_user_websocket(self, new_status):
+        """
+        Send WebSocket notification to the user when order status changes.
+        """
+        try:
+            logger.info(f"🌐 Sending WebSocket notification for order {self.number} status change to {new_status}")
+
+            # Get the Django Channels layer
+            channel_layer = get_channel_layer()
+            if not channel_layer:
+                logger.error("❌ Channel layer is None, WebSocket notification failed")
+                return
+
+            # Get user ID
+            user_id = self.user.id if self.user else None
+            if not user_id:
+                logger.warning(f"⚠️ Order {self.number}: User ID not found, skipping WebSocket notification")
+                return
+
+            # Define WebSocket group **specific to this order**
+            group_name = f"user_{user_id}_order_{self.id}"
+            logger.info(f"📡 WebSocket Group: {group_name}")
+
+            # Create WebSocket message payload
+            message = {
+                "type": "send_order_notification",
+                "data": {
+                    "message": f"📦 Order {self.number} status updated to {new_status}.",
+                    "order_id": self.id,
+                    "order_number": self.number,
+                    "status": new_status,
+                    "total_price": str(self.total_incl_tax),
+                    "currency": self.currency or "SAR",
+                }
+            }
+
+            # Send the message via Django Channels
+            async_to_sync(channel_layer.group_send)(group_name, message)
+
+            logger.info(f"✅ Order {self.number}: WebSocket notification sent successfully to user {user_id}")
+
+        except Exception as e:
+            logger.error(f"❌ Error sending WebSocket notification: {str(e)}")
+            import traceback
+            logger.error(traceback.format_exc())
+
 
     def notify_vendor_websocket(self, new_status):
         """Send WebSocket notification to vendor when order is waiting approval."""
@@ -431,11 +460,22 @@ class AbstractOrder(models.Model):
             self.date_placed = now()
 
     def save(self, *args, **kwargs):
-        # Ensure the date_placed field works as it auto_now_add was set. But
-        # this gives us the ability to set the date_placed explicitly (which is
-        # useful when importing orders from another system).
+        # Ensure the date_placed field works like auto_now_add
         self.set_date_placed_default()
+
+        # Track whether we are calling `save` from `set_status`
+        if not hasattr(self, '_status_updated'):
+            self._status_updated = False  # Initialize flag
+
+        if self.pk and not self._status_updated:  # Prevent infinite recursion
+            old_status = self.__class__.objects.filter(pk=self.pk).values_list('status', flat=True).first()
+            if old_status != self.status:
+                self._status_updated = True  # Set flag before calling `set_status`
+                self.set_status(self.status)
+                self._status_updated = False  # Reset flag after update
+
         super().save(*args, **kwargs)
+
 
 
 class AbstractOrderNote(models.Model):
