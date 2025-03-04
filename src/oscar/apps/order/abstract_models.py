@@ -143,10 +143,10 @@ class AbstractOrder(models.Model):
         """
         Set a new status for this order.
         """
-        # if new_status == self.status:
-        #     print("asdasdassdasdasdasdasdadas")
-        #     logger.info(f"⏭️ Order {self.number}: Status unchanged ({new_status}), skipping update.")
-        #     return
+        if new_status == self.status:
+            print("asdasdassdasdasdasdasdadas")
+            logger.info(f"⏭️ Order {self.number}: Status unchanged ({new_status}), skipping update.")
+            return
 
         old_status = self.status
         logger.info(f"📊 Order {self.number}: Changing status from {old_status} to {new_status}")
@@ -162,8 +162,8 @@ class AbstractOrder(models.Model):
         #     )
 
         # Update order status
-        # self.status = new_status
-        self.save()
+        self.status = new_status
+        super().save(update_fields=["status"])
 
         # Notify the user via WebSocket
         self.notify_user_websocket(new_status)
@@ -471,6 +471,7 @@ class AbstractOrder(models.Model):
             old_status = self.__class__.objects.filter(pk=self.pk).values_list('status', flat=True).first()
             if old_status != self.status:
                 self._status_updated = True  # Set flag before calling `set_status`
+                super().save(*args, **kwargs)  # First, save the changes
                 self.set_status(self.status)
                 self._status_updated = False  # Reset flag after update
 
