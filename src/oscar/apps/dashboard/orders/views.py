@@ -559,6 +559,9 @@ class OrderDetailView(EventHandlerMixin, DetailView):
         ctx["payment_event_types"] = PaymentEventType.objects.all()
 
         ctx["payment_transactions"] = self.get_payment_transactions()
+        ctx["google_maps_api_key"] = settings.GOOGLE_MAPS_API_KEY
+        ctx["supabase_url"] = settings.SERVICE_SUPABASE_URL
+        ctx["supabase_anon_key"] = settings.SERVICE_SUPABASEANON_KEY
 
         return ctx
 
