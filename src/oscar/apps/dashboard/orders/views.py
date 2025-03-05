@@ -21,6 +21,11 @@ from oscar.core.utils import datetime_combine, format_datetime
 from oscar.views import sort_queryset
 from oscar.views.generic import BulkEditMixin
 
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
+
+
 Partner = get_model("partner", "Partner")
 Transaction = get_model("payment", "Transaction")
 SourceType = get_model("payment", "SourceType")
@@ -851,3 +856,33 @@ class ShippingAddressUpdateView(UpdateView):
                 "number": self.object.order.number,
             },
         )
+
+
+
+@csrf_exempt
+def update_order_status(request, order_number):
+    """
+    API view to update order status (accept/reject).
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid request method"}, status=405)
+
+    try:
+        data = json.loads(request.body)
+        status = data.get("status")
+        valid_statuses = ["accepted", "rejected"]
+
+        if status not in valid_statuses:
+            return JsonResponse({"error": "Invalid status"}, status=400)
+
+        order = Order.objects.get(number=order_number)
+        order.status = status  # Update order status
+        order.save()
+
+        return JsonResponse({"message": f"Order {order_number} updated to {status}"})
+
+    except Order.DoesNotExist:
+        return JsonResponse({"error": "Order not found"}, status=404)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

@@ -31,6 +31,7 @@ class OrdersDashboardConfig(OscarDashboardConfig):
         )
         self.line_detail_view = get_class("dashboard.orders.views", "LineDetailView")
         self.order_stats_view = get_class("dashboard.orders.views", "OrderStatsView")
+        self.update_order_status = get_class("dashboard.orders.views", "update_order_status")
 
     def get_urls(self):
         urls = [
@@ -54,5 +55,7 @@ class OrdersDashboardConfig(OscarDashboardConfig):
                 self.shipping_address_view.as_view(),
                 name="order-shipping-address",
             ),
+            path("update-order-status/<str:order_number>/", self.update_order_status, name="update-order-status"),
+
         ]
         return self.post_process_urls(urls)
