@@ -4,6 +4,7 @@ from decimal import Decimal as D
 from django.db.models import QuerySet
 
 from oscar.core.loading import get_class
+from server.apps.main.models import SystemConfiguration
 
 Unavailable = get_class("partner.availability", "Unavailable")
 Available = get_class("partner.availability", "Available")
@@ -401,7 +402,7 @@ class UK(UseFirstStockRecord, StockRequired, FixedRateTax, Structured):
     """
 
     # Use UK VAT rate (as of December 2013)
-    rate = D("0.15")
+    rate = D(SystemConfiguration.get_solo().TAX_RATE )
 
 
 class US(UseFirstStockRecord, StockRequired, DeferredTax, Structured):

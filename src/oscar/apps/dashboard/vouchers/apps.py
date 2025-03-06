@@ -17,8 +17,12 @@ class VouchersDashboardConfig(OscarDashboardConfig):
     # pylint: disable=attribute-defined-outside-init
     def ready(self):
         self.list_view = get_class("dashboard.vouchers.views", "VoucherListView")
-        self.create_view = get_class("dashboard.vouchers.views", "VoucherCreateView")
-        self.update_view = get_class("dashboard.vouchers.views", "VoucherUpdateView")
+        # self.create_view = get_class("dashboard.vouchers.views", "VoucherCreateView")
+        self.create_view = get_class("voucher.views", "VendorVoucherCreateView")
+        # self.list_view = get_class("voucher.views", "VendorVoucherListView")
+        self.detail_view = get_class("voucher.views", "VendorVoucherDetailView")
+        self.update_view = get_class("voucher.views", "VendorVoucherUpdateView")
+        # self.update_view = get_class("dashboard.vouchers.views", "VoucherUpdateView")
         self.delete_view = get_class("dashboard.vouchers.views", "VoucherDeleteView")
         self.stats_view = get_class("dashboard.vouchers.views", "VoucherStatsView")
 
