@@ -104,10 +104,10 @@ def get_annotated_list(depth=None, parent=None):
             start_depth = node_depth
 
         # Update previous node's info
-        if prev_depth is None or node_depth > prev_depth:
-            info["has_children"] = True
-            if info.category is not None:
-                tree_slug = info.category.get_full_slug(tree_slug)
+        # if prev_depth is None or node_depth > prev_depth:
+        #     info["has_children"] = True
+        #     if info.category is not None:
+        #         tree_slug = info.category.get_full_slug(tree_slug)
 
         if prev_depth is not None and node_depth < prev_depth:
             depth_difference = prev_depth - node_depth
