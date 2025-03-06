@@ -314,3 +314,27 @@ class ValueCondition(Condition):
             to_consume -= price * quantity_to_consume
             if to_consume <= 0:
                 break
+
+
+class AlwaysTrueCondition(Condition):
+    """
+    A condition that is always satisfied, effectively bypassing condition checking.
+    """
+    name = "Always True"
+    description = "No conditions - always applies"
+
+    class Meta:
+        proxy = True
+        app_label = 'offer'
+
+    def is_satisfied(self, offer, basket):
+        return True
+
+    def is_partially_satisfied(self, offer, basket):
+        return True
+
+    def get_upsell_message(self, offer, basket):
+        return None
+
+    def can_apply_condition(self, line):
+        return True 
