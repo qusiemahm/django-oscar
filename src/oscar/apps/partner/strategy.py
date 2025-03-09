@@ -388,21 +388,14 @@ class Default(UseFirstStockRecord, StockRequired, NoTax, Structured):
 
 
 class UK(UseFirstStockRecord, StockRequired, FixedRateTax, Structured):
-    """
-    Sample strategy for the UK that:
-
-    - uses the first stockrecord for each product (effectively assuming
-        there is only one).
-    - requires that a product has stock available to be bought
-    - applies a fixed rate of tax on all products
-
-    This is just a sample strategy used for internal development.  It is not
-    recommended to be used in production, especially as the tax rate is
-    hard-coded.
-    """
-
-    # Use UK VAT rate (as of December 2013)
-    rate = D(SystemConfiguration.get_solo().TAX_RATE )
+    @property
+    def rate(self):
+        from server.apps.main.models import SystemConfiguration
+        try:
+            return D(SystemConfiguration.get_solo().VAT_RATE)
+        except Exception:
+            # Return a fallback value if the database is not ready
+            return D('0.00')
 
 
 class US(UseFirstStockRecord, StockRequired, DeferredTax, Structured):
