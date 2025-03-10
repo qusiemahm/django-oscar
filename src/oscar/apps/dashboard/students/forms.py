@@ -9,7 +9,7 @@ from django.utils.translation import pgettext_lazy
 from oscar.core.loading import get_class, get_model
 from oscar.forms.mixins import PhoneNumberMixin
 from oscar.forms.widgets import DatePickerInput
-from server.apps.school.models import GRADES, GENDER
+from server.apps.school.models import GRADES, GENDER, Pickup, School
 
 Student = get_model("school", "Student")
 PhotoValidationMixin = get_class("dashboard.students.validators", "PhotoValidationMixin")
@@ -125,3 +125,18 @@ class StudentImagesImportForm(forms.Form):
                 )
 
         return images
+    
+class PickupSearchForm(forms.Form):
+    status = forms.ChoiceField(
+        choices=[('', _('All'))] + Pickup.STATUS_CHOICES,
+        required=False
+    )
+    school = forms.ModelChoiceField(
+        queryset=School.objects.all(),
+        required=False,
+        empty_label=_('All Schools')
+    )
+    parent = forms.EmailField(required=False)
+    date_from = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    date_to = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    search = forms.CharField(required=False)

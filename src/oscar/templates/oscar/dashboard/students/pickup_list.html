@@ -1,0 +1,205 @@
+{% extends 'oscar/dashboard/layout.html' %}
+{% load currency_filters %}
+{% load sorting_tags %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block body_class %}{{ block.super }} pickups{% endblock %}
+
+{% block title %}
+{% trans "Pickups" %} | {{ block.super }}
+{% endblock %}
+{% block styles %}
+{{ block.super }}
+<style>
+    .badge-primary { background-color: #007bff; }
+.badge-info { background-color: #17a2b8; }
+.badge-warning { background-color: #ffc107; }
+.badge-success { background-color: #28a745; }
+.badge-secondary { background-color: #6c757d; }
+.badge-danger { background-color: #dc3545; }
+</style>
+{% endblock %}
+{% block breadcrumbs %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans "Pickups" %}</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block header %}
+<div class="page-header">
+    <h1>{% trans "Pickups" %}</h1>
+</div>
+{% endblock header %}
+
+{% block dashboard_content %}
+<div class="table-header">
+    <h3><i class="fas fa-search"></i> {% trans "Search" %}</h3>
+</div>
+<div class="card card-body bg-light">
+    <form method="get" class="form-inline" id="search_form">
+        {% for field in form %}
+        {% if field.is_hidden %}
+        {% render_field field class+='form-control' %}
+        {% else %}
+        <div class="form-group mr-2">
+            {{ field.label_tag }}
+            {% render_field field class+='form-control' %}
+            {% for error in field.errors %}
+            <ul class="error-block">
+                <li>{{ error }}</li>
+            </ul>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary mr-2">{% trans "Search" %}</button>
+        <a data-toggle="modal" data-target="#SearchModal" href="#">{% trans "Advanced Search" %}</a>
+    </form>
+
+    {% if search_filters %}
+    <div class="search-filter-list">
+        <label>{% trans 'Filters' %}:</label>
+        {% for filter in search_filters %}
+        <span class="badge badge-success">{{ filter }}</span>
+        {% endfor %}
+        <a href="{% url 'dashboard:pickup-list' %}">{% trans 'Clear' %}</a>
+    </div>
+    {% endif %}
+</div>
+
+{% if pickups %}
+<form method="post" class="pickup_table" id="pickups_form">
+    {% csrf_token %}
+
+    {% block pickup_list %}
+    <table class="table table-striped table-bordered table-hover">
+        <caption>
+            <h3 class="float-left">
+                {% if search_filters %}
+                {% trans "Pickup Search Results" %}
+                {% else %}
+                {% trans "All Pickups" %}
+                {% endif %}
+            </h3>
+            
+        </caption>
+
+        <thead>
+            <tr>
+                <th><input type="checkbox" name="select_all" id="select_all" /></th>
+                <th>{% trans "ID" %}</th>
+                <th>{% trans "School" %}</th>
+                <th>{% trans "Parent" %}</th>
+                <th>{% trans "Students" %}</th>
+                <th>{% trans "Vehicle" %}</th>
+                <th>{% trans "Expected Arrival" %}</th>
+                <th>{% trans "Actual Arrival" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Actions" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pickup in pickups %}
+            <tr>
+                <td><input type="checkbox" name="selected_pickup" class="selected_pickup" value="{{ pickup.id }}" />
+                </td>
+                <td>{{ pickup.id }}</td>
+                <td>{{ pickup.school.legalinformation.company_name }}</td>
+                <td>{{ pickup.parent.user.email }}</td>
+                <td>
+                    {% for student in pickup.students.all %}
+                    {{ student.full_name_en }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ pickup.vehicle.plate_number }}</td>
+                <td>{{ pickup.expected_arrival_time|date:"Y-m-d H:i" }}</td>
+                <td>{{ pickup.actual_arrival_time|date:"Y-m-d H:i"|default:"-" }}</td>
+                <td>
+                    <span class="badge badge-{% if pickup.status == 'scheduled' %}primary
+                                           {% elif pickup.status == 'prepared' %}info
+                                           {% elif pickup.status == 'on_way' %}warning
+                                           {% elif pickup.status == 'arrived' %}success
+                                           {% elif pickup.status == 'completed' %}secondary
+                                           {% else %}danger{% endif %}">
+                        {{ pickup.get_status_display }}
+                    </span>
+                </td>
+                <td>
+                    <a href="{% url 'dashboard:pickup-detail' pickup.id %}" class="btn btn-primary">
+                        {% trans "View" %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock pickup_list %}
+
+    {% block pickup_actions %}
+    <div class="card card-body bg-light">
+        <h3><i class="fas fa-exclamation-circle"></i> {% trans "Bulk Actions" %}:</h3>
+        <div class="form-group">
+            <select name="status" class="form-control">
+                <option value="">-- {% trans "Choose status" %} --</option>
+                {% for status_code, status_name in pickup_statuses %}
+                <option value="{{ status_code }}">{{ status_name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="action" value="change_pickup_statuses" class="btn btn-primary mt-2">
+                {% trans "Update Selected Pickups" %}
+            </button>
+        </div>
+    </div>
+    {% endblock %}
+
+</form>
+
+{% else %}
+<table class="table table-striped table-bordered">
+    <caption><i class="fas fa-car"></i>
+        {% if search_filters %}
+        {% trans "Pickup Search Results" %}
+        {% else %}
+        {% trans "All Pickups" %}
+        {% endif %}
+    </caption>
+    <tr>
+        <td>{% trans "No pickups found." %}</td>
+    </tr>
+</table>
+{% endif %}
+
+{% endblock dashboard_content %}
+
+{% block onbodyload %}
+{{ block.super }}
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Handle select all checkbox
+        $('#select_all').change(function () {
+            $(".selected_pickup").prop("checked", $(this).prop("checked"));
+        });
+
+        // Handle individual status updates
+        $('.update-status').click(function (e) {
+            e.preventDefault();
+            var pickupId = $(this).data('pickup-id');
+            var newStatus = $(this).data('status');
+
+            // Create a hidden form and submit it
+            var form = $('<form method="post"></form>');
+            form.append('{% csrf_token %}');
+            form.append('<input type="hidden" name="pickup_id" value="' + pickupId + '">');
+            form.append('<input type="hidden" name="status" value="' + newStatus + '">');
+            form.append('<input type="hidden" name="action" value="change_pickup_status">');
+
+            $('body').append(form);
+            form.submit();
+        });
+    });
+</script>
+{% endblock onbodyload %}

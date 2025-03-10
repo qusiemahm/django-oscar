@@ -1,0 +1,209 @@
+{% extends 'oscar/dashboard/layout.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+{% trans "Pickup" %} {{ pickup.id }} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'dashboard:pickup-list' %}">{% trans "Pickups" %}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans "Pickup" %} {{ pickup.id }}</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block header %}
+<div class="page-header">
+    <h1>{% trans "Pickup Details" %}</h1>
+</div>
+{% endblock header %}
+
+{% block dashboard_content %}
+
+<div class="row">
+    <!-- Main Pickup Information -->
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="card-title mb-0">{% trans "Pickup Information" %}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl>
+                            <dt>{% trans "Pickup ID" %}</dt>
+                            <dd>{{ pickup.id }}</dd>
+
+                            <dt>{% trans "School" %}</dt>
+                            <dd>{{ pickup.school.legalinformation.company_name }}</dd>
+
+                            <dt>{% trans "Parent" %}</dt>
+                            <dd>
+                                {{ pickup.parent.user.get_full_name }}
+                                <br>
+                                <small>{{ pickup.parent.user.email }}</small>
+                            </dd>
+
+                            <dt>{% trans "Vehicle" %}</dt>
+                            <dd>{{ pickup.vehicle.plate_number }}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl>
+                            <dt>{% trans "Expected Arrival" %}</dt>
+                            <dd>{{ pickup.expected_arrival_time|date:"Y-m-d H:i" }}</dd>
+
+                            <dt>{% trans "Actual Arrival" %}</dt>
+                            <dd>{{ pickup.actual_arrival_time|date:"Y-m-d H:i"|default:"-" }}</dd>
+
+                            <dt>{% trans "Current Status" %}</dt>
+                            <dd>
+                                <span class="badge badge-{% if pickup.status == 'scheduled' %}primary
+                                                     {% elif pickup.status == 'prepared' %}info
+                                                     {% elif pickup.status == 'on_way' %}warning
+                                                     {% elif pickup.status == 'arrived' %}success
+                                                     {% elif pickup.status == 'completed' %}secondary
+                                                     {% else %}danger{% endif %}">
+                                    {{ pickup.get_status_display }}
+                                </span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Students Information -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="card-title mb-0">{% trans "Students" %}</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Name" %}</th>
+                                <th>{% trans "Grade" %}</th>
+                                <th>{% trans "Gender" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in pickup.students.all %}
+                            <tr>
+                                <td>
+                                    {{ student.full_name_en }}
+                                    <br>
+                                    <small class="text-muted">{{ student.full_name_ar }}</small>
+                                </td>
+                                <td>{{ student.grade }}</td>
+                                <td>{{ student.get_gender_display }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Timeline and Actions -->
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="card-title mb-0">{% trans "Update Status" %}</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'dashboard:pickup-update-status' pk=pickup.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <select name="status" class="form-control">
+                            {% for status_code, status_name in pickup.STATUS_CHOICES %}
+                            <option value="{{ status_code }}" {% if pickup.status == status_code %}selected{% endif %}>
+                                {{ status_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{% trans "Update Status" %}</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Status Timeline -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title mb-0">{% trans "Status Timeline" %}</h3>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    {% for status in status_history %}
+                    <div class="timeline-item">
+                        <div class="timeline-marker {% if pickup.status == status.status %}active{% endif %}"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">{{ status.display_name }}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock dashboard_content %}
+
+{% block extrascripts %}
+{{ block.super }}
+<style>
+    .timeline {
+        position: relative;
+        padding: 20px 0;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 20px;
+    }
+
+    .timeline-marker {
+        position: absolute;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #e9ecef;
+        border: 3px solid #dee2e6;
+    }
+
+    .timeline-marker.active {
+        background: #28a745;
+        border-color: #1e7e34;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 9px;
+        top: 20px;
+        height: 100%;
+        width: 2px;
+        background: #dee2e6;
+    }
+
+    .timeline-item:last-child::before {
+        display: none;
+    }
+
+    .timeline-title {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+{% endblock %}

@@ -13,6 +13,9 @@ class StudentsDashboardConfig(OscarDashboardConfig):
     # pylint: disable=attribute-defined-outside-init
     def ready(self):
         self.student_list_view = get_class("dashboard.students.views", "StudentListView")
+        self.pickup_list_view = get_class("dashboard.students.views", "PickupListView")
+        self.pickup_detail_view = get_class("dashboard.students.views", "PickupDetailView")
+        self.pickup_update_status_view = get_class("dashboard.students.views", "PickupUpdateStatusView")
         self.student_detail_view = get_class("dashboard.students.views", "StudentDetailView")
         self.student_update_view = get_class("dashboard.students.views", "StudentUpdateView")
         self.student_create_view = get_class("dashboard.students.views", "StudentCreateView")
@@ -37,6 +40,9 @@ class StudentsDashboardConfig(OscarDashboardConfig):
     def get_urls(self):
         urls = [
             path("", self.student_list_view.as_view(), name="students-list"),
+            path("pickups/", self.pickup_list_view.as_view(), name="pickup-list"),
+            path("pickups/<int:pk>/", self.pickup_detail_view.as_view(), name="pickup-detail"),
+            path("pickups/<int:pk>/update-status/", self.pickup_update_status_view.as_view(), name="pickup-update-status"),
             path(
                 "<str:national_id>/details",
                 self.student_detail_view.as_view(),

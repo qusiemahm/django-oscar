@@ -27,12 +27,35 @@ from django.core.files.storage import default_storage
 import csv
 from io import TextIOWrapper
 from oscar.apps.dashboard.students.tasks import process_student_import
-
+from server.apps.school.models import Pickup
+from django.views.generic import View
 Student = get_model("school", "Student")
 StudentSearchForm = get_class("dashboard.students.forms", "StudentSearchForm")
+PickupSearchForm = get_class("dashboard.students.forms", "PickupSearchForm")
 StudentImagesImportForm = get_class("dashboard.students.forms", "StudentImagesImportForm")
 StudentImportValidator = get_class("dashboard.students.validators", "StudentImportValidator")
 
+from django.db.models import Q
+
+def queryset_pickups_for_user(user):
+    """
+    Returns a queryset of pickups that the user is allowed to access.
+    
+    Args:
+        user: The user object
+        
+    Returns:
+        QuerySet: Filtered queryset of Pickup objects
+    """
+    if user.is_superuser:
+        return Pickup.objects.all()
+
+    if hasattr(user, 'school'):
+        # Parent/Customer can only see their own pickups
+        return user.school.pickups.all()
+
+    # Default to empty queryset if no permissions match
+    return Pickup.objects.none()
 
 def queryset_students_for_user(user):
     """
@@ -53,7 +76,317 @@ def get_student_for_user_or_404(user, national_id):
     except ObjectDoesNotExist:
         raise Http404()
 
+class PickupListView(BulkEditMixin, ListView):
+    """
+    Dashboard view for a list of pickups.
+    """
+    model = Pickup
+    context_object_name = "pickups"
+    template_name = "oscar/dashboard/students/pickup_list.html"
+    paginate_by = settings.OSCAR_DASHBOARD_ITEMS_PER_PAGE
+    actions = ("change_pickup_statuses",)
+    form_class = PickupSearchForm
+    def dispatch(self, request, *args, **kwargs):
+        self.base_queryset = queryset_pickups_for_user(request.user).order_by(
+            "-expected_arrival_time"  # Order by newest first
+        )
+        return super().dispatch(request, *args, **kwargs)
 
+    def get_queryset(self):
+        """
+        Build the queryset for this list.
+        """
+        queryset = self.base_queryset
+
+        self.form = self.form_class(self.request.GET)
+        if not self.form.is_valid():
+            return queryset
+
+        data = self.form.cleaned_data
+
+        # Filter by status
+        if data.get("status"):
+            queryset = queryset.filter(status=data["status"])
+
+        # Filter by school
+        if data.get("school"):
+            queryset = queryset.filter(school=data["school"])
+
+        # Filter by parent
+        if data.get("parent"):
+            queryset = queryset.filter(parent__user__email=data["parent"])
+
+        # Filter by date range
+        if data.get("date_from") and data.get("date_to"):
+            queryset = queryset.filter(
+                expected_arrival_time__date__range=[
+                    data["date_from"],
+                    data["date_to"]
+                ]
+            )
+        elif data.get("date_from"):
+            queryset = queryset.filter(
+                expected_arrival_time__date__gte=data["date_from"]
+            )
+        elif data.get("date_to"):
+            queryset = queryset.filter(
+                expected_arrival_time__date__lte=data["date_to"]
+            )
+
+        # Search functionality
+        search = self.request.GET.get("search")
+        if search:
+            queryset = queryset.filter(
+                Q(parent__user__email__icontains=search) |
+                Q(students__full_name_en__icontains=search) |
+                Q(students__full_name_ar__icontains=search) |
+                Q(vehicle__plate_number__icontains=search) |
+                Q(school__name__icontains=search)
+            ).distinct()
+
+        return queryset
+
+    def get_search_filter_descriptions(self):
+        """
+        Describe the filters used in the search.
+        """
+        descriptions = []
+        data = getattr(self.form, "cleaned_data", None)
+
+        if data is None:
+            return descriptions
+
+        if data.get("status"):
+            descriptions.append(
+                _("Pickup status is {status}").format(
+                    status=dict(Pickup.STATUS_CHOICES)[data["status"]]
+                )
+            )
+
+        if data.get("school"):
+            descriptions.append(
+                _("School: {school}").format(
+                    school=data["school"].legalinformation.company_name
+                )
+            )
+
+        if data.get("parent"):
+            descriptions.append(
+                _('Parent email: "{parent}"').format(
+                    parent=data["parent"]
+                )
+            )
+
+        if data.get("date_from") and data.get("date_to"):
+            descriptions.append(
+                _("Date range: {start_date} to {end_date}").format(
+                    start_date=data["date_from"],
+                    end_date=data["date_to"]
+                )
+            )
+        elif data.get("date_from"):
+            descriptions.append(
+                _("Date from: {start_date}").format(
+                    start_date=data["date_from"]
+                )
+            )
+        elif data.get("date_to"):
+            descriptions.append(
+                _("Date to: {end_date}").format(
+                    end_date=data["date_to"]
+                )
+            )
+
+        return descriptions
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["form"] = self.form
+        ctx["pickup_statuses"] = Pickup.STATUS_CHOICES
+        ctx["search_filters"] = self.get_search_filter_descriptions()
+        return ctx
+
+    def is_csv_download(self):
+        return self.request.GET.get("response_format", None) == "csv"
+
+    def get_paginate_by(self, queryset):
+        return None if self.is_csv_download() else self.paginate_by
+
+    def get_download_filename(self, request):
+        return "pickups.csv"
+
+    def get_row_values(self, pickup):
+        return {
+            "id": pickup.id,
+            "status": dict(Pickup.STATUS_CHOICES)[pickup.status],
+            "school": pickup.school.legalinformation.company_name,
+            "parent": pickup.parent.user.email,
+            "students": ", ".join([s.full_name_en for s in pickup.students.all()]),
+            "vehicle": pickup.vehicle.plate_number,
+            "expected_arrival_time": pickup.expected_arrival_time.strftime('%Y-%m-%d %H:%M'),
+            "actual_arrival_time": pickup.actual_arrival_time.strftime('%Y-%m-%d %H:%M') if pickup.actual_arrival_time else "",
+        }
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.is_csv_download():
+            return self.download_selected_pickups(self.request, context["object_list"])
+        return super().render_to_response(context, **response_kwargs)
+
+    def change_pickup_statuses(self, request, pickups):
+        """
+        Bulk action to change pickup statuses
+        """
+        new_status = request.POST.get("status")
+        if new_status in dict(Pickup.STATUS_CHOICES):
+            for pickup in pickups:
+                pickup.status = new_status
+                pickup.save()
+        return redirect("dashboard:pickup-list")
+class PickupDetailView(DetailView):
+    model = Pickup
+    template_name = 'oscar/dashboard/students/pickup_detail.html'
+    context_object_name = 'pickup'
+
+    def get_object(self, queryset=None):
+        # Get pickup from allowed queryset only
+        allowed_pickups = queryset_pickups_for_user(self.request.user)
+        return get_object_or_404(allowed_pickups, pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pickup = self.get_object()
+        
+        # Add status history
+        context['status_history'] = [
+            {'status': status, 'display_name': dict(Pickup.STATUS_CHOICES)[status]}
+            for status in ['scheduled', 'prepared', 'on_way', 'arrived', 'completed']
+        ]
+        
+        
+        return context
+
+
+
+class PickupUpdateStatusView(View):
+    permission_required = 'school.manage_pickups'
+    
+    def post(self, request, pk):
+        # Get pickup from allowed queryset only
+        pickup = get_object_or_404(
+            queryset_pickups_for_user(request.user),
+            pk=pk
+        )
+        
+        new_status = request.POST.get('status')
+        
+        # Validate the new status
+        if not new_status:
+            messages.error(request, _('No status provided'))
+            return redirect('dashboard:pickup-detail', pk=pickup.pk)
+            
+        if new_status not in dict(Pickup.STATUS_CHOICES):
+            messages.error(request, _('Invalid status provided'))
+            return redirect('dashboard:pickup-detail', pk=pickup.pk)
+            
+        # Validate status transition
+        valid_transitions = {
+            'scheduled': ['prepared', 'cancelled'],
+            'prepared': ['on_way', 'cancelled'],
+            'on_way': ['arrived', 'cancelled'],
+            'arrived': ['completed', 'cancelled'],
+            'completed': [],  # No further transitions allowed
+            'cancelled': []   # No further transitions allowed
+        }
+        
+        if new_status not in valid_transitions[pickup.status]:
+            messages.error(
+                request,
+                _('Cannot change status from %(current)s to %(new)s') % {
+                    'current': pickup.get_status_display(),
+                    'new': dict(Pickup.STATUS_CHOICES)[new_status]
+                }
+            )
+            return redirect('dashboard:pickup-detail', pk=pickup.pk)
+
+        try:
+            # Update the status
+            pickup.status = new_status
+            
+            # If status is 'arrived', set actual_arrival_time
+            if new_status == 'arrived':
+                from django.utils import timezone
+                pickup.actual_arrival_time = timezone.now()
+            
+            pickup.save()
+            
+            # Success message
+            messages.success(
+                request,
+                _('Pickup status updated to %(status)s') % {
+                    'status': pickup.get_status_display()
+                }
+            )
+            
+            # Notify relevant parties about the status change
+            self._send_status_notifications(pickup, new_status)
+            
+        except Exception as e:
+            messages.error(
+                request,
+                _('Error updating pickup status: %(error)s') % {
+                    'error': str(e)
+                }
+            )
+            
+        return redirect('dashboard:pickup-detail', pk=pickup.pk)
+
+    def _send_status_notifications(self, pickup, new_status):
+        """
+        Send notifications to relevant parties about the status change
+        """
+        # Example notification logic - implement according to your needs
+        notifications = {
+            'prepared': {
+                'parent': _('Your pickup is being prepared'),
+                'school': _('Pickup %(id)s is being prepared')
+            },
+            'on_way': {
+                'parent': _('Your driver is on the way'),
+                'school': _('Driver is on the way for pickup %(id)s')
+            },
+            'arrived': {
+                'parent': _('Your driver has arrived at school'),
+                'school': _('Driver has arrived for pickup %(id)s')
+            },
+            'completed': {
+                'parent': _('Your pickup has been completed'),
+                'school': _('Pickup %(id)s has been completed')
+            },
+            'cancelled': {
+                'parent': _('Your pickup has been cancelled'),
+                'school': _('Pickup %(id)s has been cancelled')
+            }
+        }
+        
+        if new_status in notifications:
+            # Notify parent
+            if hasattr(pickup.parent.user, 'email'):
+                # Send email notification
+                pass
+                
+            # Notify school staff
+            school_staff = pickup.school.schoolstaff_set.all()
+            for staff in school_staff:
+                if hasattr(staff.user, 'email'):
+                    # Send email notification
+                    pass
+
+    def handle_no_permission(self):
+        messages.error(
+            self.request,
+            _('You do not have permission to update pickup status')
+        )
+        return redirect('dashboard:pickup-detail', pk=self.kwargs['pk'])
 class StudentListView(BulkEditMixin, ListView):
     """
     Dashboard view for a list of students.

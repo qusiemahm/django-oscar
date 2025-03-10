@@ -306,6 +306,10 @@ OSCAR_SCHOOLS_DASHBOARD_NAVIGATION = [
                 "label": _("Add New Students"),
                 "url_name": "dashboard:student-create",
             },
+            {
+                "label": _("Pickups"),
+                "url_name": "dashboard:pickup-list",
+            },
         ],
     },
 ]
