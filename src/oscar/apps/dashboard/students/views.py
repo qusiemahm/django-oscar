@@ -373,20 +373,7 @@ class PickupUpdateStatusView(View):
             if hasattr(pickup.parent.user, 'email'):
                 # Send email notification
                 pass
-                
-            # Notify school staff
-            school_staff = pickup.school.schoolstaff_set.all()
-            for staff in school_staff:
-                if hasattr(staff.user, 'email'):
-                    # Send email notification
-                    pass
 
-    def handle_no_permission(self):
-        messages.error(
-            self.request,
-            _('You do not have permission to update pickup status')
-        )
-        return redirect('dashboard:pickup-detail', pk=self.kwargs['pk'])
 class StudentListView(BulkEditMixin, ListView):
     """
     Dashboard view for a list of students.
