@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, FormView, ListView, UpdateView, CreateView
+from django.utils import timezone
 
 from oscar.apps.payment.exceptions import PaymentError
 from oscar.core.compat import UnicodeCSVWriter
@@ -29,6 +30,11 @@ from io import TextIOWrapper
 from oscar.apps.dashboard.students.tasks import process_student_import
 from server.apps.school.models import Pickup
 from django.views.generic import View
+import logging
+from server.apps.notifications.push_notification_handler import NotificationService
+
+logger = logging.getLogger(__name__)
+
 Student = get_model("school", "Student")
 StudentSearchForm = get_class("dashboard.students.forms", "StudentSearchForm")
 PickupSearchForm = get_class("dashboard.students.forms", "PickupSearchForm")
@@ -319,7 +325,6 @@ class PickupUpdateStatusView(View):
             
             # If status is 'arrived', set actual_arrival_time
             if new_status == 'arrived':
-                from django.utils import timezone
                 pickup.actual_arrival_time = timezone.now()
             
             pickup.save()
@@ -349,35 +354,75 @@ class PickupUpdateStatusView(View):
         """
         Send notifications to relevant parties about the status change
         """
-        # Example notification logic - implement according to your needs
+        print("_send_status_notifications", pickup, new_status)
+        # Define notification messages for each status
         notifications = {
             'prepared': {
-                'parent': _('Your pickup is being prepared'),
-                'school': _('Pickup %(id)s is being prepared')
+                'title_en': 'Pickup Status Update',
+                'title_ar': 'تحديث حالة الاستلام',
+                'message_en': f'Your pickup #{pickup.id} is being prepared. Please be ready.',
+                'message_ar': f'جاري تجهيز طلب الاستلام رقم {pickup.id}. يرجى الاستعداد.',
             },
             'on_way': {
-                'parent': _('Your driver is on the way'),
-                'school': _('Driver is on the way for pickup %(id)s')
+                'title_en': 'Driver On The Way',
+                'title_ar': 'السائق في الطريق',
+                'message_en': f'Your driver is on the way to pick up your children.',
+                'message_ar': 'السائق في طريقه لاستلام أطفالك.',
             },
             'arrived': {
-                'parent': _('Your driver has arrived at school'),
-                'school': _('Driver has arrived for pickup %(id)s')
+                'title_en': 'Driver Arrived',
+                'title_ar': 'وصل السائق',
+                'message_en': f'Your driver has arrived at the school.',
+                'message_ar': 'وصل السائق إلى المدرسة.',
             },
             'completed': {
-                'parent': _('Your pickup has been completed'),
-                'school': _('Pickup %(id)s has been completed')
+                'title_en': 'Pickup Completed',
+                'title_ar': 'تم الاستلام',
+                'message_en': f'Your pickup #{pickup.id} has been completed successfully.',
+                'message_ar': f'تم إكمال عملية الاستلام رقم {pickup.id} بنجاح.',
             },
             'cancelled': {
-                'parent': _('Your pickup has been cancelled'),
-                'school': _('Pickup %(id)s has been cancelled')
+                'title_en': 'Pickup Cancelled',
+                'title_ar': 'تم إلغاء الاستلام',
+                'message_en': f'Your pickup #{pickup.id} has been cancelled.',
+                'message_ar': f'تم إلغاء طلب الاستلام رقم {pickup.id}.',
             }
         }
-        
+
         if new_status in notifications:
-            # Notify parent
+            notification_data = notifications[new_status]
+            print("notification_data", notification_data)
+            
+            # Create notification service instance
+            notification_service = NotificationService(
+                title_en=notification_data['title_en'],
+                title_ar=notification_data['title_ar'],
+                message_en=notification_data['message_en'],
+                message_ar=notification_data['message_ar'],
+                data={
+                    'type': 'pickup_status_update',
+                    'pickup_id': pickup.id,
+                    'status': new_status,
+                    'timestamp': str(pickup.actual_arrival_time if new_status == 'arrived' else pickup.modified),
+                }
+            )
+            print("notification_service", notification_service)
+
+            # Send notification to parent
+            if pickup.parent and pickup.parent.user:
+                print("pickup.parent", pickup.parent.user)
+                try:
+                    notification_service.send_notifications([pickup.parent.user])
+                except Exception as e:
+                    logger.error(f"Failed to send notification to parent for pickup {pickup.id}: {str(e)}")
+
+            # Additional notification channels (email, SMS, etc.) can be added here
             if hasattr(pickup.parent.user, 'email'):
-                # Send email notification
-                pass
+                try:
+                    # Send email notification (implement your email sending logic here)
+                    pass
+                except Exception as e:
+                    logger.error(f"Failed to send email to parent for pickup {pickup.id}: {str(e)}")
 
 class StudentListView(BulkEditMixin, ListView):
     """
