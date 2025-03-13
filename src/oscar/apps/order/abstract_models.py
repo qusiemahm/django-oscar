@@ -144,7 +144,6 @@ class AbstractOrder(models.Model):
         Set a new status for this order.
         """
         if new_status == self.status:
-            print("asdasdassdasdasdasdasdadas")
             logger.info(f"⏭️ Order {self.number}: Status unchanged ({new_status}), skipping update.")
             return
 
