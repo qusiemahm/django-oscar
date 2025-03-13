@@ -35,6 +35,7 @@ class DashboardConfig(OscarDashboardConfig):
         self.shipping_app = apps.get_app_config("shipping_dashboard")
         self.subscriptions_app = apps.get_app_config("subscriptions_dashboard")
         self.students_app = apps.get_app_config("students_dashboard")
+        self.school_app = apps.get_app_config("school_dashboard")
 
     def get_urls(self):
         from django.contrib.auth import views as auth_views

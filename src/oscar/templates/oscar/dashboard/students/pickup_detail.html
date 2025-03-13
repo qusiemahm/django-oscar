@@ -22,7 +22,118 @@
 </div>
 {% endblock header %}
 
+{% block extrastyles %}
+{{ block.super }}
+<style>
+    .pickup-tracking-container {
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .pickup-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .status-badge {
+        padding: 8px 16px;
+        border-radius: 20px;
+        color: white;
+        font-weight: bold;
+    }
+
+    #pickup-map {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        height: 400px;
+        margin: 20px 0;
+    }
+
+    .distance-info {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #007bff;
+    }
+
+    .distance-info strong {
+        color: #007bff;
+    }
+
+    .distance-info small {
+        color: #6c757d;
+        display: block;
+        margin-top: 5px;
+    }
+
+    .timeline {
+        position: relative;
+        padding: 20px 0;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 20px;
+    }
+
+    .timeline-marker {
+        position: absolute;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #e9ecef;
+        border: 3px solid #dee2e6;
+    }
+
+    .timeline-marker.active {
+        background: #28a745;
+        border-color: #1e7e34;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 9px;
+        top: 20px;
+        height: 100%;
+        width: 2px;
+        background: #dee2e6;
+    }
+
+    .timeline-item:last-child::before {
+        display: none;
+    }
+
+    .timeline-title {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+{% endblock %}
+
 {% block dashboard_content %}
+
+{% if pickup.status == 'on_way' %}
+<div class="pickup-tracking-container">
+    <div class="pickup-details">
+        <h2>{% trans "Live Tracking" %}</h2>
+        <div class="status-badge" style="background-color: #ffc107;">{{ pickup.get_status_display }}</div>
+    </div>
+
+    <div id="pickup-map"></div>
+    <div id="distance"></div>
+</div>
+{% endif %}
 
 <div class="row">
     <!-- Main Pickup Information -->
@@ -159,51 +270,279 @@
 
 {% block extrascripts %}
 {{ block.super }}
-<style>
-    .timeline {
-        position: relative;
-        padding: 20px 0;
-    }
+{% if pickup.status == 'on_way' %}
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}"></script>
 
-    .timeline-item {
-        position: relative;
-        padding-left: 40px;
-        margin-bottom: 20px;
-    }
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        let map, parentMarker, branchMarker;
+        const pickupId = '{{ pickup.id }}';
 
-    .timeline-marker {
-        position: absolute;
-        left: 0;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #e9ecef;
-        border: 3px solid #dee2e6;
-    }
+        // Initialize Supabase client
+        const supabaseClient = supabase.createClient(
+            '{{ supabase_url }}',
+            '{{ supabase_anon_key }}'
+        );
 
-    .timeline-marker.active {
-        background: #28a745;
-        border-color: #1e7e34;
-    }
+        function setCookie(name, value, daysToExpire) {
+            const date = new Date();
+            date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
+            const expires = `expires=${date.toUTCString()}`;
+            document.cookie = `${name}=${value}; ${expires}; path=/`;
+        }
 
-    .timeline-item::before {
-        content: '';
-        position: absolute;
-        left: 9px;
-        top: 20px;
-        height: 100%;
-        width: 2px;
-        background: #dee2e6;
-    }
+        function getCookie(name) {
+            const cookieName = `${name}=`;
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith(cookieName)) {
+                    return cookie.substring(cookieName.length, cookie.length);
+                }
+            }
+            return null;
+        }
 
-    .timeline-item:last-child::before {
-        display: none;
-    }
+        async function initMap() {
+            // Branch location from Django template
+            const branchLocation = {
+                lat: parseFloat('{{ lat }}'),
+                lng: parseFloat('{{ lng }}'),
+            };
 
-    .timeline-title {
-        font-size: 1rem;
-        margin: 0;
-        padding: 0;
-    }
-</style>
+            // Initialize directions service and renderer
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({
+                suppressMarkers: true,
+                polylineOptions: {
+                    strokeColor: '#4CAF50',
+                    strokeWeight: 4
+                }
+            });
+
+            // Initialize map centered on branch
+            map = new google.maps.Map(document.getElementById('pickup-map'), {
+                zoom: 13,
+                center: branchLocation,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            // Attach directions renderer to map
+            directionsRenderer.setMap(map);
+
+            // Add branch marker
+            branchMarker = new google.maps.Marker({
+                position: branchLocation,
+                map: map,
+                icon: {
+                    url: '{% static "oscar/assets/img/store-marker.png" %}',
+                    scaledSize: new google.maps.Size(64, 64)
+                },
+                title: "{{ pickup.school.legalinformation.company_name }}"
+            });
+
+            // Initialize parent marker
+            parentMarker = new google.maps.Marker({
+                map: map,
+                icon: {
+                    url: '{% static "oscar/assets/img/customer-marker.png" %}',
+                    scaledSize: new google.maps.Size(64, 64)
+                },
+                title: 'Parent Vehicle'
+            });
+
+            // Add info windows
+            const branchInfo = new google.maps.InfoWindow({
+                content: '<div><strong>{{ pickup.school.legalinformation.company_name }}</strong></div>'
+            });
+
+            const parentInfo = new google.maps.InfoWindow({
+                content: '<div><strong>Parent Vehicle</strong></div>'
+            });
+
+            branchMarker.addListener('click', () => {
+                branchInfo.open(map, branchMarker);
+            });
+
+            parentMarker.addListener('click', () => {
+                parentInfo.open(map, parentMarker);
+            });
+
+            // Retrieve saved coordinates for this pickup
+            const savedCoords = getCookie(`parent_coords_${pickupId}`);
+            if (savedCoords) {
+                const [lat, lng] = savedCoords.split(',');
+                const locationData = { latitude: parseFloat(lat), longitude: parseFloat(lng) };
+                updateParentLocation(locationData);
+            }
+
+            // Subscribe to location updates
+            await subscribeToLocationUpdates();
+        }
+
+        async function calculateAndDisplayRoute(parentPosition) {
+            const branchPosition = branchMarker.getPosition();
+
+            try {
+                const result = await directionsService.route({
+                    origin: parentPosition,
+                    destination: branchPosition,
+                    travelMode: google.maps.TravelMode.DRIVING
+                });
+
+                directionsRenderer.setDirections(result);
+
+                const route = result.routes[0].legs[0];
+                updateDistanceInfo(route.distance.text, route.duration.text, 'Driving route');
+            } catch (error) {
+                console.warn('Error calculating driving route:', error);
+                handleRoutingError(parentPosition, branchPosition);
+            }
+        }
+
+        function handleRoutingError(parentPosition, branchPosition) {
+            directionsRenderer.setMap(null);
+
+            const straightLine = new google.maps.Polyline({
+                path: [parentPosition, branchPosition],
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                map: map
+            });
+
+            const distance = google.maps.geometry.spherical.computeDistanceBetween(
+                new google.maps.LatLng(parentPosition),
+                branchPosition
+            );
+
+            const distanceKm = (distance / 1000).toFixed(1);
+            updateDistanceInfo(
+                `${distanceKm} km`,
+                'N/A',
+                'Straight line distance (no route available)'
+            );
+
+            window.currentStraightLine = straightLine;
+        }
+
+        function updateDistanceInfo(distance, duration, routeType) {
+            const distanceDiv = document.getElementById('distance');
+            let html = `
+                <div class="distance-info ${routeType.includes('Straight') ? 'warning' : ''}">
+                    <strong>Distance to school:</strong> ${distance}
+                    ${duration !== 'N/A' ? `<br><strong>Estimated arrival:</strong> ${duration}` : ''}
+                    <br>
+                    <small>${routeType}</small>
+                </div>`;
+
+            if (routeType.includes('Straight')) {
+                html += `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        No driving route available between these points.
+                        Showing direct distance instead.
+                    </div>`;
+            }
+
+            distanceDiv.innerHTML = html;
+        }
+
+        function calculateBearing(from, to) {
+            const fromLat = (from.lat * Math.PI) / 180;
+            const fromLng = (from.lng * Math.PI) / 180;
+            const toLat = (to.lat * Math.PI) / 180;
+            const toLng = (to.lng * Math.PI) / 180;
+
+            const y = Math.sin(toLng - fromLng) * Math.cos(toLat);
+            const x = Math.cos(fromLat) * Math.sin(toLat) -
+                Math.sin(fromLat) * Math.cos(toLat) * Math.cos(toLng - fromLng);
+            const bearing = (Math.atan2(y, x) * 180) / Math.PI;
+            return (bearing + 360) % 360;
+        }
+
+        async function subscribeToLocationUpdates() {
+            console.log('Subscribing to location updates for pickup:', pickupId);
+
+            try {
+                const channel = supabaseClient
+                    .channel(`pickup_tracking`)
+                    .on(
+                        'broadcast',
+                        { event: `pickup_${pickupId}` },
+                        (payload) => {
+                            console.log('Received broadcast:', payload);
+                            if (payload && payload.payload) {
+                                if (payload.payload.latitude && payload.payload.longitude) {
+                                    updateParentLocation(payload.payload);
+                                } else {
+                                    console.warn('Received location data is invalid', payload);
+                                }
+                            }
+                        }
+                    )
+                    .subscribe((status) => {
+                        console.log('Channel subscription status:', status);
+                    });
+
+                console.log('Successfully subscribed to channel');
+            } catch (error) {
+                console.error('Error subscribing to updates:', error);
+            }
+        }
+
+        let previousPosition = null;
+        let currentRotation = 0;
+
+        function updateParentLocation(locationData) {
+            if (!locationData || !locationData.latitude || !locationData.longitude) {
+                console.error('Invalid location data', locationData);
+                return;
+            }
+
+            const parentPosition = {
+                lat: parseFloat(locationData.latitude),
+                lng: parseFloat(locationData.longitude)
+            };
+
+            setCookie(`parent_coords_${pickupId}`, `${parentPosition.lat},${parentPosition.lng}`, 1);
+
+            if (previousPosition) {
+                const bearing = calculateBearing(previousPosition, parentPosition);
+                const rotationDelta = bearing - currentRotation;
+
+                if (Math.abs(rotationDelta) > 180) {
+                    currentRotation += rotationDelta > 0 ? -360 : 360;
+                }
+                currentRotation += rotationDelta * 0.2;
+
+                parentMarker.setIcon({
+                    url: '{% static "oscar/assets/img/car-marker.png" %}',
+                    scaledSize: new google.maps.Size(64, 64),
+                    rotation: currentRotation,
+                    anchor: new google.maps.Point(20, 20)
+                });
+            }
+
+            parentMarker.setPosition(parentPosition);
+            previousPosition = parentPosition;
+
+            const bounds = map.getBounds();
+            if (!bounds || !bounds.contains(parentPosition)) {
+                const newBounds = new google.maps.LatLngBounds();
+                newBounds.extend(parentPosition);
+                newBounds.extend(branchMarker.getPosition());
+                map.fitBounds(newBounds);
+            }
+
+            calculateAndDisplayRoute(parentPosition);
+        }
+
+        // Initialize map
+        await initMap();
+    });
+</script>
+{% endif %}
 {% endblock %}

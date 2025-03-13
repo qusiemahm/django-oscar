@@ -261,8 +261,13 @@ class PickupDetailView(DetailView):
             {'status': status, 'display_name': dict(Pickup.STATUS_CHOICES)[status]}
             for status in ['scheduled', 'prepared', 'on_way', 'arrived', 'completed']
         ]
-        
-        
+        branches = pickup.school.branches.all()
+        print("branches", branches)
+        context["google_maps_api_key"] = settings.GOOGLE_MAPS_API_KEY
+        context["supabase_url"] = settings.SERVICE_SUPABASE_URL
+        context["supabase_anon_key"] = settings.SERVICE_SUPABASEANON_KEY
+        context["lng"] = branches[0].location.x
+        context["lat"] = branches[0].location.y
         return context
 
 
@@ -373,20 +378,7 @@ class PickupUpdateStatusView(View):
             if hasattr(pickup.parent.user, 'email'):
                 # Send email notification
                 pass
-                
-            # Notify school staff
-            school_staff = pickup.school.schoolstaff_set.all()
-            for staff in school_staff:
-                if hasattr(staff.user, 'email'):
-                    # Send email notification
-                    pass
 
-    def handle_no_permission(self):
-        messages.error(
-            self.request,
-            _('You do not have permission to update pickup status')
-        )
-        return redirect('dashboard:pickup-detail', pk=self.kwargs['pk'])
 class StudentListView(BulkEditMixin, ListView):
     """
     Dashboard view for a list of students.
