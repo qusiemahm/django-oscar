@@ -403,7 +403,7 @@ class PickupUpdateStatusView(View):
                     'type': 'pickup_status_update',
                     'pickup_id': pickup.id,
                     'status': new_status,
-                    'timestamp': str(pickup.actual_arrival_time if new_status == 'arrived' else pickup.modified),
+                    'timestamp': str(timezone.now()),
                 }
             )
             print("notification_service", notification_service)
