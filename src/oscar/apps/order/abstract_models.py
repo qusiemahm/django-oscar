@@ -220,40 +220,45 @@ class AbstractOrder(models.Model):
 
 
     def notify_vendor_websocket(self, new_status):
-        """Send WebSocket notification to vendor when order is waiting approval."""
-        print("🔄 Starting notify_vendor_websocket")  # Debug print
-        
+        """Send WebSocket notification to vendor staff when order status changes."""
+        print("🔄 Starting notify_vendor_websocket")
         try:
-            print("📡 Getting channel layer")  # Debug print
             channel_layer = get_channel_layer()
-            
             if not channel_layer:
-                print("❌ Channel layer is None")  # Debug print
+                print("❌ Channel layer is None")
+                return
+
+            # If your Order model has a .store field, and the store has a .vendor
+            if not hasattr(self, "store") or not self.store:
+                print("❌ Order has no store associated, cannot notify vendor staff")
                 return
             
-            print(f"👤 User ID: {self.store.vendor.user.id if self.user else 'No user'}")  # Debug print
-            print(f"📦 Order number: {self.number}")  # Debug print
-            
-            group_name = f"vendor_{self.store.vendor.user.id if self.store.vendor.user.id else 'unknown'}"
-            print(f"�� Group name: {group_name}")  # Debug print
-            
+            vendor_id = self.store.vendor_id
+            branch_id = self.store.id  # The store ID
+
+            # Common message payload
             message = {
-                "type": "send_order_notification",
-                "message": f"New order {self.number} is waiting for approval.",
+                "type": "send_order_notification",  # must match consumer handler
+                "data": {
+                    "message": f"Order {self.number} updated to {new_status}",
+                    "order_number": self.number,
+                    "status": new_status,
+                },
             }
-            print(f"📨 Preparing to send message: {message}")  # Debug print
-            
-            async_to_sync(channel_layer.group_send)(
-                group_name,
-                message
-            )
-            print("✅ WebSocket notification sent successfully")  # Debug print
-            
+
+            # 1) Notify the entire vendor group (super_admin/admin)
+            vendor_group = f"vendor_{vendor_id}"
+            async_to_sync(channel_layer.group_send)(vendor_group, message)
+
+            # 2) Also notify the branch-specific group (manager/staff)
+            branch_group = f"vendor_{vendor_id}_branch_{branch_id}"
+            async_to_sync(channel_layer.group_send)(branch_group, message)
+
+            print("✅ WebSocket notification sent to both vendor-wide and branch-specific groups")
+
         except Exception as e:
-            print(f"❌ Error in notify_vendor_websocket: {str(e)}")  # Debug print
-            print(f"Error type: {type(e)}")  # Debug print
-            import traceback
-            print(f"Traceback: {traceback.format_exc()}")  # Debug print
+            print(f"❌ Error in notify_vendor_websocket: {str(e)}")
+
 
     def _create_order_status_change(self, old_status, new_status):
         # Not setting the status on the order as that should be handled before
