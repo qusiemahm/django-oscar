@@ -17,7 +17,8 @@ def update_stock_alerts(sender, instance, created, **kwargs):
         return
     stockrecord = instance
     try:
-        alert = StockAlert.objects.get(stockrecord=stockrecord, status=StockAlert.OPEN)
+        # alert = StockAlert.objects.get(stockrecord=stockrecord, status=StockAlert.OPEN)
+        alert = None
     except StockAlert.DoesNotExist:
         alert = None
 

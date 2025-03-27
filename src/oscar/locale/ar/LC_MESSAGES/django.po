@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Abdallah Nassif <a.nassif012@gmail.com>, 2019
 # Abdallah Nassif <a.nassif012@gmail.com>, 2019
@@ -32,7 +32,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-oscar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-23 11:26+0000\n"
+"POT-Creation-Date: 2025-02-18 14:41+0000\n"
 "PO-Revision-Date: 2013-02-18 17:05+0000\n"
 "Last-Translator: yhhgftyl <yhhgftyl@grr.la>, 2014\n"
 "Language-Team: Arabic (http://app.transifex.com/codeinthehole/django-oscar/"
@@ -44,32 +44,32 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:25
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:26
 msgid "Mr"
 msgstr "السيد"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:26
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:27
 msgid "Miss"
 msgstr "الآنسة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:27
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:28
 msgid "Mrs"
 msgstr "السيدة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:28
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:29
 msgid "Ms"
 msgstr "الآنسة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:29
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:30
 msgid "Dr"
 msgstr "الدكتور"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:218
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:219
 msgctxt "Treatment Pronouns for the customer"
 msgid "Title"
 msgstr "المسمى"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:223
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:224
 #: src/django-oscar/src/oscar/apps/customer/abstract_models.py:54
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_manage.html:39
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_user_list.html:39
@@ -77,7 +77,7 @@ msgstr "المسمى"
 msgid "First name"
 msgstr "الأسم الأول"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:224
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:225
 #: src/django-oscar/src/oscar/apps/customer/abstract_models.py:55
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_manage.html:40
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_user_list.html:40
@@ -85,40 +85,41 @@ msgstr "الأسم الأول"
 msgid "Last name"
 msgstr "اسم العائلة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:228
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:229
 msgid "First line of address"
 msgstr "القسم الأول من العنوان"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:229
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:230
 msgid "Second line of address"
 msgstr "القسم الثاني من العنوان"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:230
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:231
 msgid "Third line of address"
 msgstr "القسم الثالث من العنوان"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:231
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:235
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:100
 msgid "City"
 msgstr "المدينة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:232
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:239
 msgid "State/County"
 msgstr "الولاية/المحافظة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:233
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:240
 msgid "Post/Zip-code"
 msgstr "الرمز البريدي"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:235
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:460
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:242
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:467
 msgid "Country"
 msgstr "الدولة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:241
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:248
 msgid "Search text - used only for searching addresses"
 msgstr "نص البحث - تستخدم فقط للبحث عن العناوين"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:272
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:279
 #: src/django-oscar/src/oscar/apps/address/apps.py:9
 #: src/django-oscar/src/oscar/templates/oscar/checkout/checkout.html:32
 #: src/django-oscar/src/oscar/templates/oscar/checkout/thank_you.html:38
@@ -129,82 +130,82 @@ msgstr "نص البحث - تستخدم فقط للبحث عن العناوين"
 msgid "Address"
 msgstr "العنوان"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:273
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:280
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_list.html:46
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/detail.html:107
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/detail.html:151
 msgid "Addresses"
 msgstr "العناوين"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:307
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:314
 #, python-format
 msgid "Addresses in %(country)s require a valid postcode"
 msgstr "العناوين في %(country)s تتطلب رمز بريدي صالح"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:320
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:327
 #, python-format
 msgid "The postcode '%(postcode)s' is not valid for %(country)s"
 msgstr "الرمز البريدي '%(postcode)s' غير صالح لدولة %(country)s"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:433
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:440
 msgid "ISO 3166-1 alpha-2"
 msgstr "ISO 3166-1 alpha-2"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:435
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:442
 msgid "ISO 3166-1 alpha-3"
 msgstr "ISO 3166-1 alpha-3"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:437
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:444
 msgid "ISO 3166-1 numeric"
 msgstr "ISO 3166-1 numeric"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:441
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:448
 msgid "Country name"
 msgstr "الدولة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:444
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:451
 msgid "Official name"
 msgstr "الإسم"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:447
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:454
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1636
 msgid "Display order"
 msgstr "طريقة العرض"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:450
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:457
 msgid "Higher the number, higher the country in the list."
 msgstr "كلما زاد الرقم كلما ارتفعت الدولة بالقائمة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:454
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:461
 msgid "Is shipping country"
 msgstr "دولة الشحن"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:461
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:468
 #: src/django-oscar/src/oscar/apps/shipping/abstract_models.py:27
 msgid "Countries"
 msgstr "الدول"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:507
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:514
 #: src/django-oscar/src/oscar/forms/mixins.py:28
 msgid "Phone number"
 msgstr "رقم الهاتف"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:509
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:516
 msgid "In case we need to call you about your order"
 msgstr "في حال احتجنا الاتصال بك بخصوص طلبك"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:513
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:520
 #: src/django-oscar/src/oscar/templates/oscar/checkout/checkout.html:55
 #: src/django-oscar/src/oscar/templates/oscar/checkout/thank_you.html:57
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_detail.html:538
 msgid "Instructions"
 msgstr "التعليمات"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:514
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:521
 msgid "Tell us anything we should know when delivering your order."
 msgstr "أخبرنا أي شيء علينا أن نعرفه عند توصيل الطلب."
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:521
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:528
 #: src/django-oscar/src/oscar/templates/oscar/checkout/shipping_address.html:5
 #: src/django-oscar/src/oscar/templates/oscar/checkout/shipping_address.html:12
 #: src/django-oscar/src/oscar/templates/oscar/customer/anon_order.html:21
@@ -213,11 +214,11 @@ msgstr "أخبرنا أي شيء علينا أن نعرفه عند توصيل ا
 msgid "Shipping address"
 msgstr "عنوان الشحن"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:522
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:529
 msgid "Shipping addresses"
 msgstr "عناوين الشحن"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:548
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:555
 #: src/django-oscar/src/oscar/apps/analytics/abstract_models.py:51
 #: src/django-oscar/src/oscar/apps/analytics/abstract_models.py:80
 #: src/django-oscar/src/oscar/apps/analytics/abstract_models.py:103
@@ -237,30 +238,30 @@ msgstr "عناوين الشحن"
 msgid "User"
 msgstr "المستخدم"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:553
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:560
 msgid "Default shipping address?"
 msgstr "عنوان الشحن الإفتراضي؟"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:558
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:565
 msgid "Default billing address?"
 msgstr "عنوان المحاسبة الإفتراضي؟"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:565
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:572
 msgid "Number of Orders as Shipping Address"
 msgstr "عدد الطلبات كعنوان شحن"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:570
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:577
 msgid "Number of Orders as Billing Address"
 msgstr "عدد الطلبات كعنوان فاتورة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:576
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:583
 msgid "Address Hash"
 msgstr "عنوان Hash"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:578
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:585
 #: src/django-oscar/src/oscar/apps/analytics/abstract_models.py:85
 #: src/django-oscar/src/oscar/apps/analytics/abstract_models.py:106
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:727
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:755
 #: src/django-oscar/src/oscar/apps/communication/abstract_models.py:122
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:268
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:1023
@@ -272,32 +273,31 @@ msgstr "عنوان Hash"
 msgid "Date Created"
 msgstr "تاريخ الإنشاء"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:606
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:613
 msgid "User address"
 msgstr "عنوان المستخدم"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:607
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:614
 msgid "User addresses"
 msgstr "عناوين المستخدم"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:618
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:625
 msgid "This address is already in your address book"
 msgstr "هذا العنوان مسجل مسبقا في دفتر العناوين الخاص بك"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:627
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:634
 #: src/django-oscar/src/oscar/templates/oscar/checkout/thank_you.html:98
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_detail.html:551
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_list.html:100
 msgid "Billing address"
 msgstr "عنوان المحاسبة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:628
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:635
 msgid "Billing addresses"
 msgstr "عناوين المحاسبة"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:648
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:655
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:536
-#: src/django-oscar/src/oscar/apps/partner/abstract_models.py:109
 #: src/django-oscar/src/oscar/apps/partner/apps.py:9
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_update.html:229
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/stockalert_list.html:48
@@ -305,18 +305,18 @@ msgstr "عناوين المحاسبة"
 msgid "Partner"
 msgstr "الشريك"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:654
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:661
 msgid "Partner address"
 msgstr "عنوان الشريك"
 
-#: src/django-oscar/src/oscar/apps/address/abstract_models.py:655
+#: src/django-oscar/src/oscar/apps/address/abstract_models.py:662
 msgid "Partner addresses"
 msgstr "عناوين الشريك"
 
 #: src/django-oscar/src/oscar/apps/analytics/abstract_models.py:19
 #: src/django-oscar/src/oscar/apps/analytics/abstract_models.py:83
 #: src/django-oscar/src/oscar/apps/analytics/reports.py:17
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:699
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:727
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:340
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:520
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1210
@@ -384,7 +384,7 @@ msgstr "استعراضات المنتج"
 #: src/django-oscar/src/oscar/apps/analytics/abstract_models.py:59
 #: src/django-oscar/src/oscar/apps/analytics/reports.py:61
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:342
-#: src/django-oscar/src/oscar/defaults.py:163
+#: src/django-oscar/src/oscar/defaults.py:174
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/line_detail.html:14
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_detail.html:15
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_list.html:10
@@ -477,8 +477,9 @@ msgstr "احصائيات المنتج"
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1470
 #: src/django-oscar/src/oscar/apps/catalogue/reviews/forms.py:11
 #: src/django-oscar/src/oscar/apps/communication/abstract_models.py:81
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:100
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:127
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:567
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:136
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:163
 #: src/django-oscar/src/oscar/apps/dashboard/users/forms.py:41
 #: src/django-oscar/src/oscar/apps/dashboard/vouchers/forms.py:46
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:93
@@ -582,10 +583,11 @@ msgstr "تم الإرسال - تم طلبها خلال اتمام عملية ا�
 #: src/django-oscar/src/oscar/apps/basket/abstract_models.py:62
 #: src/django-oscar/src/oscar/apps/catalogue/reviews/abstract_models.py:63
 #: src/django-oscar/src/oscar/apps/customer/abstract_models.py:166
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:340
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:437
 #: src/django-oscar/src/oscar/apps/dashboard/orders/forms.py:80
 #: src/django-oscar/src/oscar/apps/dashboard/reviews/forms.py:15
 #: src/django-oscar/src/oscar/apps/dashboard/reviews/forms.py:26
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:577
 #: src/django-oscar/src/oscar/apps/dashboard/users/forms.py:39
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:158
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:1247
@@ -607,6 +609,11 @@ msgstr "تم الإرسال - تم طلبها خلال اتمام عملية ا�
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/statistics.html:56
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_delete.html:41
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_list.html:61
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:144
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:68
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:104
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:112
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:138
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/list.html:46
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/partials/alert.html:20
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/detail.html:127
@@ -618,7 +625,7 @@ msgstr "الوضعية"
 
 #: src/django-oscar/src/oscar/apps/basket/abstract_models.py:69
 #: src/django-oscar/src/oscar/apps/voucher/abstract_models.py:165
-#: src/django-oscar/src/oscar/defaults.py:218
+#: src/django-oscar/src/oscar/defaults.py:229
 #: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_totals.html:42
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_delete.html:9
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_delete.html:11
@@ -666,7 +673,7 @@ msgid "Date submitted"
 msgstr "تاريخ الإرسال"
 
 #: src/django-oscar/src/oscar/apps/basket/abstract_models.py:82
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:686
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:714
 #: src/django-oscar/src/oscar/apps/basket/apps.py:13
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:45
 #: src/django-oscar/src/oscar/templates/oscar/basket/basket.html:5
@@ -703,11 +710,11 @@ msgid ""
 msgstr ""
 "بسبب القيود التقنية لا يمكننا شحن أكثر من %(threshold)d عنصر في طلب واحد."
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:693
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:721
 msgid "Line Reference"
 msgstr "الخط المرجعي"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:707
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:735
 #: src/django-oscar/src/oscar/apps/basket/forms.py:91
 #: src/django-oscar/src/oscar/apps/basket/forms.py:219
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:580
@@ -728,60 +735,59 @@ msgstr "الخط المرجعي"
 msgid "Quantity"
 msgstr "الكمية"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:713
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:741
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:75
-#: src/django-oscar/src/oscar/apps/partner/abstract_models.py:121
 #: src/django-oscar/src/oscar/apps/payment/abstract_models.py:88
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_update.html:236
 msgid "Currency"
 msgstr "العملة"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:716
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:744
 msgid "Price excl. Tax"
 msgstr "السعر بدون ضريبة"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:719
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:747
 msgid "Price incl. Tax"
 msgstr "السعر مع ضريبة"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:722
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:750
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:619
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:998
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:1397
 msgid "VAT rate code"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:729
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:757
 #: src/django-oscar/src/oscar/apps/communication/abstract_models.py:123
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:423
 msgid "Date Updated"
 msgstr "تاريخ التحديث"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:741
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:769
 msgid "Basket line"
 msgstr "خط السلة"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:742
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:770
 msgid "Basket lines"
 msgstr "خطوط السلة"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:751
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:779
 #, python-format
 msgid "Basket #%(basket_id)d, Product #%(product_id)d, quantity %(quantity)d"
 msgstr "سلة التسوق #%(basket_id)d, المنتج #%(product_id)d, الكمية %(quantity)d"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:761
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:789
 #, python-format
 msgid "You cannot modify a %s basket"
 msgstr "لا يمكنك تعديل سلة %s "
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1050
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1078
 #, fuzzy, python-format
 #| msgid " This offer is no longer available."
 msgid "'%(product)s' is no longer available"
 msgstr " هذا العرض لم يعد متاحا."
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1069
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1097
 #, python-format
 msgid ""
 "The price of '%(product)s' has increased from %(old_price)s to %(new_price)s "
@@ -790,7 +796,7 @@ msgstr ""
 "سعر المنتج '%(product)s' ارتفع من %(old_price)s الى %(new_price)s منذ وقت "
 "إضافته لسلة التسوق الخاصة بك"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1076
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1104
 #, python-format
 msgid ""
 "The price of '%(product)s' has decreased from %(old_price)s to %(new_price)s "
@@ -799,7 +805,7 @@ msgstr ""
 "سعر المنتج '%(product)s' انخفض من %(old_price)s الى %(new_price)s منذ وقت "
 "إضافته لسلة التسوق الخاصة بك"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1092
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1120
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:941
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:982
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:1108
@@ -808,7 +814,7 @@ msgstr ""
 msgid "Line"
 msgstr "خط"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1095
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1123
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:998
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1406
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1552
@@ -818,18 +824,18 @@ msgstr "خط"
 msgid "Option"
 msgstr "خيار"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1097
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1125
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:572
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:846
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:951
 msgid "Value"
 msgstr "القيمة"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1102
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1130
 msgid "Line attribute"
 msgstr "خط السمة"
 
-#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1103
+#: src/django-oscar/src/oscar/apps/basket/abstract_models.py:1131
 msgid "Line attributes"
 msgstr "خط السمات"
 
@@ -923,7 +929,7 @@ msgstr "معرف المستخدم"
 #: src/django-oscar/src/oscar/apps/catalogue/reviews/forms.py:12
 #: src/django-oscar/src/oscar/apps/communication/abstract_models.py:36
 #: src/django-oscar/src/oscar/apps/customer/abstract_models.py:142
-#: src/django-oscar/src/oscar/apps/customer/views.py:443
+#: src/django-oscar/src/oscar/apps/customer/views.py:450
 #: src/django-oscar/src/oscar/apps/dashboard/users/forms.py:13
 #: src/django-oscar/src/oscar/apps/dashboard/users/forms.py:42
 #: src/django-oscar/src/oscar/apps/order/reports.py:19
@@ -937,6 +943,9 @@ msgstr "معرف المستخدم"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reports/partials/order_report.html:11
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reports/partials/submitted_basket_report.html:8
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reports/partials/user_report.html:8
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:178
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:88
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:172
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/detail.html:34
 msgid "Email"
 msgstr "البريد الإلكتروني"
@@ -1046,17 +1055,13 @@ msgstr "القسيمة الشرائية '%s' تم إزالتها من سلة ا�
 msgid "Slug"
 msgstr "slug"
 
-#: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:97
-msgid "Requires shipping?"
-msgstr "يتطلب الشحن؟"
-
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:101
 msgid "Track stock levels?"
 msgstr "تتبع مستويات المخزون؟"
 
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:108
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1553
-#: src/django-oscar/src/oscar/defaults.py:144
+#: src/django-oscar/src/oscar/defaults.py:151
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/option_delete.html:27
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/option_form.html:28
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/option_list.html:6
@@ -1130,7 +1135,8 @@ msgstr "الفئة"
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:325
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:498
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:783
-#: src/django-oscar/src/oscar/defaults.py:132
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:81
+#: src/django-oscar/src/oscar/defaults.py:139
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/category_delete.html:12
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/category_form.html:8
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/category_form.html:18
@@ -1167,11 +1173,10 @@ msgid "Product structure"
 msgstr "بنية المنتج"
 
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:391
-msgid "Show this product in search results and catalogue listings."
-msgstr "إظهار هذا المنتج في نتائج البحث و فهرس المنتجات."
+msgid "Controls whether this item is visible in listings and search results."
+msgstr ""
 
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:395
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:93
 #: src/django-oscar/src/oscar/apps/dashboard/orders/forms.py:73
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:578
 #: src/django-oscar/src/oscar/templates/oscar/catalogue/detail.html:117
@@ -1183,9 +1188,13 @@ msgid "UPC"
 msgstr "UPC"
 
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:401
+#, fuzzy
+#| msgid ""
+#| "Universal Product Code (UPC) is an identifier for a product which is not "
+#| "specific to a particular  supplier. Eg an ISBN for a book."
 msgid ""
-"Universal Product Code (UPC) is an identifier for a product which is not "
-"specific to a particular  supplier. Eg an ISBN for a book."
+"Universal Code (UPC) is an identifier for a product which is not specific to "
+"a particular  supplier. Eg an ISBN for a book."
 msgstr ""
 "Universal Product Code (UPC) is an identifier for a product which is not "
 "specific to a particular  supplier. Eg an ISBN for a book."
@@ -1273,7 +1282,7 @@ msgid "These are products that are recommended to accompany the main product."
 msgstr "هذه هي المنتجات الموصى بها لترافق المنتج الرئيسي."
 
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:488
-#: src/django-oscar/src/oscar/defaults.py:270
+#: src/django-oscar/src/oscar/defaults.py:318
 msgid "Rating"
 msgstr "التقييم"
 
@@ -1282,17 +1291,9 @@ msgstr "التقييم"
 msgid "Date updated"
 msgstr "تاريخ التحديث"
 
-#: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:507
-msgid "Is discountable?"
-msgstr "قابل للخصم؟"
-
-#: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:510
-msgid "This flag indicates if this product can be used in an offer or not"
-msgstr "يشير هذا الخيار إذا كان يمكن استخدام هذا المنتج في العرض أم لا"
-
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:521
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:107
-#: src/django-oscar/src/oscar/defaults.py:124
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:384
+#: src/django-oscar/src/oscar/defaults.py:131
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_delete.html:15
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_list.html:8
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_list.html:18
@@ -1450,13 +1451,13 @@ msgstr "الملف"
 
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1008
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1473
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:569
 #: src/django-oscar/src/oscar/apps/dashboard/offers/forms.py:27
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:137
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:566
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:844
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:950
 #: src/django-oscar/src/oscar/apps/payment/abstract_models.py:39
-#: src/django-oscar/src/oscar/defaults.py:269
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_class_form.html:103
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_detail.html:71
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/summary.html:16
@@ -1636,6 +1637,7 @@ msgid "Is this option required?"
 msgstr "هل هذا الخيار مطلوب؟"
 
 #: src/django-oscar/src/oscar/apps/catalogue/abstract_models.py:1486
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:575
 msgid "Help text"
 msgstr ""
 
@@ -1683,9 +1685,9 @@ msgid "Product images"
 msgstr "صور المنتج"
 
 #: src/django-oscar/src/oscar/apps/catalogue/apps.py:12
-#: src/django-oscar/src/oscar/apps/catalogue/apps.py:51
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/apps.py:11
-#: src/django-oscar/src/oscar/defaults.py:113
+#: src/django-oscar/src/oscar/apps/catalogue/apps.py:57
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/apps.py:10
+#: src/django-oscar/src/oscar/defaults.py:120
 msgid "Catalogue"
 msgstr "الكاتالوج"
 
@@ -2118,6 +2120,10 @@ msgstr "يحدد ما إذا كان المستخدم يستطيع الدخول �
 #: src/django-oscar/src/oscar/apps/customer/abstract_models.py:62
 #: src/django-oscar/src/oscar/apps/customer/abstract_models.py:161
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_detail.html:132
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:69
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:105
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:136
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:158
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/detail.html:38
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/partials/voucher_set_details_table.html:38
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_list.html:112
@@ -2365,55 +2371,58 @@ msgstr ""
 msgid "You already have an active alert for this product"
 msgstr "لديك تنيه فعال مسبقا لهذا المنتج"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:181
+#: src/django-oscar/src/oscar/apps/customer/views.py:184
 msgid "Welcome back"
 msgstr "مرحبا بعودتك"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:233
+#: src/django-oscar/src/oscar/apps/customer/views.py:236
 msgid "Thanks for registering!"
 msgstr "شكرا لإنضمامك"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:264
+#: src/django-oscar/src/oscar/apps/customer/views.py:267
+#: src/django-oscar/src/oscar/defaults.py:355
 #: src/django-oscar/src/oscar/templates/oscar/customer/partials/standard_tabs.html:5
 msgid "Profile"
 msgstr "الملف"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:313
+#: src/django-oscar/src/oscar/apps/customer/views.py:316
 msgid "Edit Profile"
 msgstr "تعديل الملف الشخصي"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:343
+#: src/django-oscar/src/oscar/apps/customer/views.py:346
 msgid "Profile updated"
 msgstr "تحديث الملف الشخصي"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:360
+#: src/django-oscar/src/oscar/apps/customer/views.py:363
 #: src/django-oscar/src/oscar/templates/oscar/customer/profile/profile.html:33
 msgid "Delete profile"
 msgstr "حذف الملف الشخصي"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:373
+#: src/django-oscar/src/oscar/apps/customer/views.py:376
 msgid "Your profile has now been deleted. Thanks for using the site."
 msgstr "تم حذف ملفك الشخصي. شكرا لك لإستخدام الموقع."
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:381
+#: src/django-oscar/src/oscar/apps/customer/views.py:384
 msgid "Change Password"
 msgstr "تغيير كلمة المرور"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:393
+#: src/django-oscar/src/oscar/apps/customer/views.py:396
 msgid "Password updated"
 msgstr "تم تحديث كلمة المرور"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:418
+#: src/django-oscar/src/oscar/apps/customer/views.py:425
 #: src/django-oscar/src/oscar/templates/oscar/customer/partials/standard_tabs.html:14
 msgid "Email History"
 msgstr "سجل البريد الإلكتروني"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:461
+#: src/django-oscar/src/oscar/apps/customer/views.py:468
 #: src/django-oscar/src/oscar/templates/oscar/customer/partials/standard_tabs.html:8
 msgid "Order History"
 msgstr "سجل الطلبات"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:515
+#: src/django-oscar/src/oscar/apps/customer/views.py:522
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:578
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:121
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:341
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:408
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:450
@@ -2431,14 +2440,14 @@ msgstr "سجل الطلبات"
 msgid "Order"
 msgstr "الطلب"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:569
+#: src/django-oscar/src/oscar/apps/customer/views.py:576
 #, python-format
 msgid ""
 "All available lines from order %(number)s have been added to your basket"
 msgstr ""
 "All available lines from order %(number)s have been added to your basket"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:579
+#: src/django-oscar/src/oscar/apps/customer/views.py:586
 #, python-format
 msgid ""
 "It is not possible to re-order order %(number)s as none of its lines are "
@@ -2446,57 +2455,57 @@ msgid ""
 msgstr ""
 "لا يمكن إعادة طلب الطلب رقم %(number)s حيث جميع الطلبات به غير متاحة للشراء"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:620
+#: src/django-oscar/src/oscar/apps/customer/views.py:627
 #, python-format
 msgid "%(qty)d copies of '%(product)s' have been added to your basket"
 msgstr "%(qty)d نسخ من '%(product)s' تم إضافتها لسلة التسوق"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:623
+#: src/django-oscar/src/oscar/apps/customer/views.py:630
 #, python-format
 msgid "'%s' has been added to your basket"
 msgstr "'%s' تمت إضافته لسلة التسوق"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:654
+#: src/django-oscar/src/oscar/apps/customer/views.py:661
 #: src/django-oscar/src/oscar/templates/oscar/customer/partials/standard_tabs.html:11
 msgid "Address Book"
 msgstr "دفتر العناوين"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:666
-#: src/django-oscar/src/oscar/apps/customer/views.py:676
+#: src/django-oscar/src/oscar/apps/customer/views.py:673
+#: src/django-oscar/src/oscar/apps/customer/views.py:683
 #: src/django-oscar/src/oscar/templates/oscar/customer/address/address_list.html:58
 msgid "Add a new address"
 msgstr "إضافة عنوان جديد"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:680
+#: src/django-oscar/src/oscar/apps/customer/views.py:687
 #, python-format
 msgid "Address '%s' created"
 msgstr "تم إنشاء العنوان '%s' "
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:689
-#: src/django-oscar/src/oscar/apps/customer/views.py:699
+#: src/django-oscar/src/oscar/apps/customer/views.py:696
+#: src/django-oscar/src/oscar/apps/customer/views.py:706
 #: src/django-oscar/src/oscar/templates/oscar/checkout/shipping_address.html:48
 #: src/django-oscar/src/oscar/templates/oscar/checkout/user_address_form.html:5
 #: src/django-oscar/src/oscar/templates/oscar/checkout/user_address_form.html:17
 msgid "Edit address"
 msgstr "تعديل العنوان"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:706
+#: src/django-oscar/src/oscar/apps/customer/views.py:713
 #, python-format
 msgid "Address '%s' updated"
 msgstr "تم تحديث العنوان '%s' "
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:713
+#: src/django-oscar/src/oscar/apps/customer/views.py:720
 #: src/django-oscar/src/oscar/templates/oscar/checkout/user_address_delete.html:5
 #: src/django-oscar/src/oscar/templates/oscar/checkout/user_address_delete.html:17
 msgid "Delete address?"
 msgstr "حذف العنوان؟"
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:722
+#: src/django-oscar/src/oscar/apps/customer/views.py:729
 #, python-format
 msgid "Address '%s' deleted"
 msgstr "تم حذف العنوان '%s' "
 
-#: src/django-oscar/src/oscar/apps/customer/views.py:744
+#: src/django-oscar/src/oscar/apps/customer/views.py:751
 msgid "We do not ship to this country"
 msgstr "لا نشحن لهذه الدولة"
 
@@ -2590,6 +2599,7 @@ msgstr "تم نقل '%(title)s' إلى قائمة الأمنيات '%(name)s'"
 
 #: src/django-oscar/src/oscar/apps/dashboard/apps.py:12
 #: src/django-oscar/src/oscar/defaults.py:104
+#: src/django-oscar/src/oscar/defaults.py:276
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/attribute_option_group_delete.html:26
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/attribute_option_group_form.html:26
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/attribute_option_group_list.html:12
@@ -2610,7 +2620,7 @@ msgstr "تم نقل '%(title)s' إلى قائمة الأمنيات '%(name)s'"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/comms/list.html:13
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:16
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:20
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:94
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:115
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_delete.html:13
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_detail.html:14
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_list.html:15
@@ -2643,6 +2653,10 @@ msgstr "تم نقل '%(title)s' إلى قائمة الأمنيات '%(name)s'"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_detail.html:12
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_form.html:17
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_list.html:12
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:15
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:14
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:16
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:15
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/delete.html:14
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/list.html:14
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/update.html:13
@@ -2660,46 +2674,74 @@ msgstr "تم نقل '%(title)s' إلى قائمة الأمنيات '%(name)s'"
 msgid "Dashboard"
 msgstr "لوحة التحكم"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:67
-msgid "Leave blank to generate from category name"
-msgstr ""
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:89
+#, fuzzy
+#| msgid "This field is required"
+msgid "This field is required."
+msgstr "هذا الحقل مطلوب"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:77
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:108
 msgid "Create a new product of type"
 msgstr "انشاء منتج جديد من النوع"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:78
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:109
 msgid "-- Choose type --"
 msgstr "- اختيار النوع -"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:94
-msgid "Product title"
-msgstr "اسم المنتج"
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:125
+#, fuzzy
+#| msgid "Title"
+msgid "title"
+msgstr "العنوان"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:264
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:310
 msgid "Leave blank to generate from product title"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:405
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:337
+msgid "Cancellation Policy"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:338
+msgid "Details about the cancellation policy for this service."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:343
+msgid "Rescheduling Policy"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:344
+msgid "Details about the rescheduling policy for this service."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:502
 msgid "Select an option group"
 msgstr "اختر خيار مجموعة"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:429
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:526
 msgid "An option group is required"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/formsets.py:106
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/forms.py:573
+#, fuzzy
+#| msgid "Required"
+msgid "Required?"
+msgstr "مطلوب"
+
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/formsets.py:115
 msgid ""
 "At least one stock record must be set to a partner that you're associated "
 "with."
 msgstr "يجب تعيين سجل مخزون واحد على الأقل لشريك أنت مرتبط به."
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/formsets.py:141
-msgid "Stand-alone and parent products must have at least one category"
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/formsets.py:150
+#, fuzzy
+#| msgid "Stand-alone and parent products must have at least one category"
+msgid "products must have at least one category"
 msgstr ""
 "المنتجات المنفردة و المرتبطة بمنتج رئيسي يجب ان تكون بقسم واحد على الأقل"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/formsets.py:144
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/formsets.py:153
 msgid "A child product should not have categories"
 msgstr "المنتج الفرعي لا يجب ان يكون بأي قسم"
 
@@ -2716,14 +2758,13 @@ msgid "Variants"
 msgstr "Variants"
 
 #: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:39
-#: src/django-oscar/src/oscar/apps/partner/abstract_models.py:167
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_update.html:289
 msgid "Stock records"
 msgstr "سجلات المخزون"
 
 #: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:44
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:110
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:132
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:146
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:168
 #: src/django-oscar/src/oscar/templates/oscar/customer/wishlists/wishlists_detail.html:79
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/attribute_option_group_row_actions.html:6
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/category_row_actions.html:6
@@ -2736,6 +2777,7 @@ msgstr "سجلات المخزون"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_list.html:88
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/ranges/range_list.html:64
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_list.html:105
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:153
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/list.html:72
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/detail.html:85
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_list.html:135
@@ -2744,11 +2786,18 @@ msgstr "سجلات المخزون"
 msgid "Actions"
 msgstr "Actions"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:80
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:56
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:116
+#, fuzzy
+#| msgid "Is public"
+msgid "Is Public"
+msgstr "عام"
+
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:104
 msgid "Number of child categories"
 msgstr "Number of child categories"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:90
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:126
 #, python-format
 msgid "%s Category"
 msgid_plural "%s Categories"
@@ -2759,11 +2808,11 @@ msgstr[3] "%s أقسام"
 msgstr[4] "%s أقسام"
 msgstr[5] "%s أقسام"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:105
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:141
 msgid "Option summary"
 msgstr "ملخص الخيارات"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:116
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:152
 #, python-format
 msgid "%s Attribute Option Group"
 msgid_plural "%s Attribute Option Groups"
@@ -2774,7 +2823,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:138
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/tables.py:174
 #, python-format
 msgid "%s Option"
 msgid_plural "%s Options"
@@ -2785,193 +2834,201 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:106
-msgid "Product search results"
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:133
+#, fuzzy, python-brace-format
+#| msgid "Product search results"
+msgid "{business_category} search results"
 msgstr "نتائج البحث عن منتج"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:196
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:223
 msgid "Please choose a product type"
 msgstr "يرجى إختيار نوع منتج"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:331
-#, python-format
-msgid "Create new %(product_class)s product"
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:384
+msgid "Service"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:385
+#, fuzzy, python-format
+#| msgid "Create new %(product_class)s product"
+msgid "Create new %(product_class)s %(product_type)s"
 msgstr "أنشئ %(product_class)s جديد للمنتج"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:335
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:390
 #, python-format
 msgid "Create new variant of %(parent_product)s"
 msgstr "أنشئ متغير جديد لـ %(parent_product)s"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:342
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:397
 #, python-format
 msgid "Editing variant of %(parent_product)s"
 msgstr "تحرير تشكيلة %(parent_product)s"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:452
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:749
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:880
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1033
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:507
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:847
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:978
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1131
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:461
 msgid "Your submitted data was not valid - please correct the errors below"
 msgstr "المعلومات المرسلة غير صحيحة, الرجاء تصحيحها و إعادة إرسالها"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:519
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:574
 msgid "Delete product variant?"
 msgstr "حذف نوع المنتج؟"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:521
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:576
 msgid "Delete product?"
 msgstr "حذف المنتج؟"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:568
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:623
 #, python-format
 msgid "Deleted product variant '%s'"
 msgstr "حذفت تشكيلة المنتج '%s'"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:574
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:629
 #, python-format
 msgid "Deleted product '%s'"
 msgstr "Deleted product '%s'"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:596
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:651
 #, python-format
 msgid "Alerts with status \"%s\""
 msgstr "Alerts with status \"%s\""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:599
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:654
 msgid "All alerts"
 msgstr "جميع التنبيهات"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:653
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:751
 msgid "Add a new category"
 msgstr "إضافة قسم جديد"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:657
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:755
 msgid "Category created successfully"
 msgstr "تم إنشاء القسم بنجاح"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:675
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:773
 #, python-format
 msgid "Update category '%s'"
 msgstr "Update category '%s'"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:679
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:777
 msgid "Category updated successfully"
 msgstr "تم تحديث القسم ينجاح"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:698
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:796
 msgid "Category deleted successfully"
 msgstr "Category deleted successfully"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:783
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:881
 msgid "Add a new product type"
 msgstr "إضافة تصنيف منتج جديد"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:786
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:884
 msgid "Product type created successfully"
 msgstr "تم إنشاء تصنيف المنتج بنجاح"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:794
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:892
 #, python-format
 msgid "Update product type '%s'"
 msgstr "تحديث نوع المنتج '%s'"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:797
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:895
 msgid "Product type updated successfully"
 msgstr "تم تحديث نوع المنتج بنجاح"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:812
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:910
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:999
-#: src/django-oscar/src/oscar/defaults.py:128
+#: src/django-oscar/src/oscar/defaults.py:135
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_class_list.html:24
 msgid "Product Types"
 msgstr "انواع المنتج"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:823
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:921
 #, python-format
 msgid "Delete product type '%s'"
 msgstr "حذف نوع المنتج '%s'"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:828
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:974
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1080
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:926
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1072
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1178
 #, python-format
 msgid "Unable to delete '%s'"
 msgstr "غير قادر على حذف '%s'"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:831
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:929
 #, python-format
 msgid "%i products are still assigned to this type"
 msgstr "%iلا تزال مخصصة لهذا النوع من المنتجات "
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:836
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:934
 msgid "Product type deleted successfully"
 msgstr "تم حذف تصنيف المنتج بنجاح"
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:921
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1019
 msgid "Add a new Attribute Option Group"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:924
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1022
 msgid "Attribute Option Group created successfully"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:941
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1039
 #, python-format
 msgid "Update Attribute Option Group '%s'"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:944
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1042
 msgid "Attribute Option Group updated successfully"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:969
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1067
 #, python-format
 msgid "Delete Attribute Option Group '%s'"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:978
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1076
 #, python-format
 msgid "%i product attributes are still assigned to this attribute option group"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:999
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1097
 msgid "Attribute Option Group deleted successfully"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1045
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1143
 msgid "Add a new Option"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1048
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1146
 msgid "Option created successfully"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1060
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1158
 #, python-format
 msgid "Update Option '%s'"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1063
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1161
 msgid "Option updated successfully"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1074
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1172
 #, python-format
 msgid "Delete Option '%s'"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1084
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1182
 #, python-format
 msgid "%i products are still assigned to this option"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1089
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1187
 #, python-format
 msgid "%i product classes are still assigned to this option"
 msgstr ""
 
-#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1096
+#: src/django-oscar/src/oscar/apps/dashboard/catalogue/views.py:1194
 msgid "Option deleted successfully"
 msgstr ""
 
@@ -3257,7 +3314,6 @@ msgstr "اسم المنتج"
 
 #: src/django-oscar/src/oscar/apps/dashboard/orders/forms.py:74
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:539
-#: src/django-oscar/src/oscar/apps/partner/abstract_models.py:117
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/line_detail.html:78
 msgid "Partner SKU"
 msgstr "SKU الشريك"
@@ -3265,11 +3321,13 @@ msgstr "SKU الشريك"
 #: src/django-oscar/src/oscar/apps/dashboard/orders/forms.py:84
 #: src/django-oscar/src/oscar/apps/dashboard/reports/forms.py:24
 #: src/django-oscar/src/oscar/apps/dashboard/reviews/forms.py:29
+#: src/django-oscar/src/oscar/apps/dashboard/students/forms.py:80
 msgid "Date from"
 msgstr "التاريخ منذ"
 
 #: src/django-oscar/src/oscar/apps/dashboard/orders/forms.py:87
 #: src/django-oscar/src/oscar/apps/dashboard/reports/forms.py:27
+#: src/django-oscar/src/oscar/apps/dashboard/students/forms.py:83
 msgid "Date to"
 msgstr "التاريخ إلى"
 
@@ -3427,11 +3485,13 @@ msgid "Order status changed from '%(old_status)s' to '%(new_status)s'"
 msgstr "Order status changed from '%(old_status)s' to '%(new_status)s'"
 
 #: src/django-oscar/src/oscar/apps/dashboard/orders/views.py:486
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:353
 msgid "No valid action submitted"
 msgstr "No valid action submitted"
 
 #: src/django-oscar/src/oscar/apps/dashboard/orders/views.py:490
 #: src/django-oscar/src/oscar/apps/dashboard/orders/views.py:495
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:357
 #: src/django-oscar/src/oscar/views/generic.py:71
 msgid "Invalid action"
 msgstr "Invalid action"
@@ -3480,6 +3540,7 @@ msgstr ""
 
 #: src/django-oscar/src/oscar/apps/dashboard/orders/views.py:640
 #: src/django-oscar/src/oscar/apps/dashboard/orders/views.py:721
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:404
 msgid "Please choose a valid amount"
 msgstr "يرجى اختيار مبلغ صالح"
 
@@ -3531,6 +3592,7 @@ msgid "Payment event created"
 msgstr "Payment event created"
 
 #: src/django-oscar/src/oscar/apps/dashboard/orders/views.py:804
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:518
 #, python-format
 msgid "%(field)s changed from '%(old_value)s' to '%(new_value)s'"
 msgstr "%(field)s changed from '%(old_value)s' to '%(new_value)s'"
@@ -3801,6 +3863,7 @@ msgstr "The report is inclusive of this date"
 
 #: src/django-oscar/src/oscar/apps/dashboard/reports/forms.py:32
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_list.html:86
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:96
 msgid "Download"
 msgstr "تحميل"
 
@@ -3880,16 +3943,458 @@ msgstr " with customer name matching '%s'"
 msgid "Shipping dashboard"
 msgstr "لوحة الشحن"
 
-#: src/django-oscar/src/oscar/apps/dashboard/tables.py:6
-#, python-format
-msgid "%d Row"
-msgid_plural "%d Rows"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+#: src/django-oscar/src/oscar/apps/dashboard/students/apps.py:11
+#, fuzzy
+#| msgid "Orders dashboard"
+msgid "Students dashboard"
+msgstr "لوحة الطلبيات"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/forms.py:75
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:70
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:570
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:54
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:48
+msgid "National ID"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/forms.py:76
+#, fuzzy
+#| msgid "Filename"
+msgid "Full name"
+msgstr "إسم الملف"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/forms.py:77
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:74
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:571
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:122
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:60
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:110
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:116
+msgid "Grade"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/forms.py:78
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:75
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:573
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:110
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:56
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:96
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:109
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:104
+#, fuzzy
+#| msgid "Sender"
+msgid "Gender"
+msgstr "المرسل"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/forms.py:85
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:76
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:574
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:133
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:64
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:111
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:127
+#, fuzzy
+#| msgid "Phone number"
+msgid "Parent Phone Number"
+msgstr "رقم الهاتف"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/tasks.py:69
+#, fuzzy
+#| msgid "A user with that email address already exists"
+msgid "Row {}: Student with National ID {} already exists"
+msgstr "يوجد مستخدم مسجل بالفعل بهذا البريد الالكتروني"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/tasks.py:81
+msgid "Row {}: Error importing student - {}"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:20
+msgid "Supported photo formats are JPG, JPEG, and PNG."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:43
+msgid "Row {}: Student images directory does not exist"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:52
+msgid "Row {}: Photo '{}' does not exist in the student images directory"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:65
+msgid "Only CSV files are allowed"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:69
+msgid "File size cannot exceed 5MB"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:86
+msgid "Missing required headers: {}"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:89
+msgid "Invalid file encoding. Please ensure the file is UTF-8 encoded"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:91
+msgid "Invalid CSV format: {}"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:103
+#, fuzzy
+#| msgid "A discount value is required"
+msgid "Row {}: National ID is required"
+msgstr "قيمة الخصم مطلوبة"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:105
+msgid "Row {}: National ID must be 10 digits"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:110
+#, fuzzy
+#| msgid "A discount value is required"
+msgid "Row {}: English name is required"
+msgstr "قيمة الخصم مطلوبة"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:112
+msgid "Row {}: English name must be between 2 and 100 characters"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:116
+#, fuzzy
+#| msgid "A discount value is required"
+msgid "Row {}: Arabic name is required"
+msgstr "قيمة الخصم مطلوبة"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:118
+msgid "Row {}: Arabic name must be between 2 and 100 characters"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:121
+#, fuzzy
+#| msgid "At least one field is required."
+msgid "Row {}: Parent Phone Number is required"
+msgstr "حقل واحد على الأقل مطلوب"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:123
+msgid "Row {}: Parent Phone Number must be exactly 9 digits"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:127
+#, fuzzy
+#| msgid "A discount value is required"
+msgid "Row {}: Grade is required"
+msgstr "قيمة الخصم مطلوبة"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:129
+msgid "Row {}: Invalid grade. Must be between 1 and 12"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:134
+msgid "Row {}: Date of birth is required"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:139
+msgid "Row {}: Date of birth cannot be in the future"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:141
+msgid "Row {}: Invalid date format. Use YYYY-MM-DD"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/validators.py:146
+msgid "Row {}: Invalid gender. Must be 'M' or 'F'"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:71
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:568
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:74
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:44
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:106
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:68
+msgid "Full Name (English)"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:72
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:569
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:86
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:48
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:107
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:80
+msgid "Full Name (Arabic)"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:73
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:572
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:98
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:92
+#, fuzzy
+#| msgid "Date of creation"
+msgid "Date of Birth"
+msgstr "تاريخ الإنشاء"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:77
+#, fuzzy
+#| msgid "Status"
+msgid "status"
+msgstr "الوضعية"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:180
+#, python-brace-format
+msgid "Student national_id starts with \"{national_id}\""
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:187
+#, python-brace-format
+msgid "Student full name in English starts with \"{full_name_en}\""
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:193
+#, fuzzy, python-brace-format
+#| msgid "Order number starts with \"{order_number}\""
+msgid "Student parent phone number starts with \"{parent_phone_number}\""
+msgstr "يبدأ رقم الطلب بـ \"{order_number}\""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:199
+#, python-brace-format
+msgid "Student full name in Arabic starts with \"{full_name_ar}\""
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:205
+#, fuzzy, python-brace-format
+#| msgid "Order number starts with \"{order_number}\""
+msgid "Student  grade starts with \"{grade}\""
+msgstr "يبدأ رقم الطلب بـ \"{order_number}\""
+
+#. Translators: "UPC" means "universal product code" and it is
+#. used to uniquely identify a product in an online store.
+#. "Item" in this context means an item in an student placed
+#. in an online store.
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:216
+#, python-brace-format
+msgid "Owns by parent with email \"{parent}\""
+msgstr ""
+
+#. Translators: This string refers to students in an online
+#. store that were made within a particular date range.
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:224
+#, fuzzy, python-brace-format
+#| msgid " created between %(start_date)s and %(end_date)s"
+msgid "The date of birth is between {start_date} and {end_date}"
+msgstr " created between %(start_date)s and %(end_date)s"
+
+#. Translators: This string refers to students in an online store
+#. that were made after a particular date.
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:233
+#, fuzzy, python-brace-format
+#| msgid "The end date must be after the start date"
+msgid "The date of birth after {start_date}"
+msgstr "يجب أن يكون تاريخ النهاية بعد تاريخ البدء"
+
+#. Translators: This string refers to students in an online store
+#. that were made before a particular date.
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:241
+#, fuzzy, python-brace-format
+#| msgid "Placed before {end_date}"
+msgid "The date of birth before {end_date}"
+msgstr "حددت قبل {end_date}"
+
+#. Translators: This string refers to an student in an
+#. online store.  Some examples of student status are
+#. "purchased", "cancelled", or "refunded".
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:249
+#, fuzzy, python-brace-format
+#| msgid "Order status is {order_status}"
+msgid "Student status is {student_status}"
+msgstr "حالة الطلبية هي {order_status}"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:378
+#, fuzzy
+#| msgid "Category deleted successfully"
+msgid "Student deleted successfully"
+msgstr "Category deleted successfully"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:381
+#, fuzzy
+#| msgid "Note cannot be deleted"
+msgid "Student cannot be deleted"
+msgstr "لا يمكن حذف الملاحظة"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:392
+#, fuzzy, python-format
+#| msgid "Order status changed from '%(old_status)s' to '%(new_status)s'"
+msgid "Student status changed from '%(old_status)s' to '%(new_status)s'"
+msgstr "Order status changed from '%(old_status)s' to '%(new_status)s'"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:435
+#, fuzzy, python-format
+#| msgid "Update details"
+msgid "Update student: %s"
+msgstr "تحديث التفاصيل"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:452
+#, fuzzy, python-format
+#| msgid ""
+#| "Delivery address updated:\n"
+#| "%s"
+msgid "Fields updated: %s"
+msgstr ""
+"Delivery address updated:\n"
+"%s"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:481
+#, fuzzy
+#| msgid "Category updated successfully"
+msgid "Student Added Successfully."
+msgstr "تم تحديث القسم ينجاح"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:536
+#, fuzzy
+#| msgid "Please select a valid product"
+msgid "Please select a CSV file"
+msgstr "الرجاء تحديد منتج صالح"
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:578
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:32
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:104
+msgid "Photo"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/students/views.py:629
+msgid "Student import has started. You will be notified when it's complete."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/apps.py:11
+#, fuzzy
+#| msgid "Shipping dashboard"
+msgid "Subscriptions dashboard"
+msgstr "لوحة الشحن"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:86
+#, fuzzy
+#| msgid "You do not have any active alerts for out-of-stock products."
+msgid "You don't have an active subscription to cancel."
+msgstr "لا يوجد لديك أي تنبيهات فعالة لأي منتج غير متوفر حاليا"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:126
+#, fuzzy
+#| msgid "Your stock alert has been cancelled"
+msgid "Your subscription has been successfully cancelled."
+msgstr "تم إاغاء تنبيه مخزون المنتج"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:132
+msgid "Unable to cancel subscription. No active subscription found."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:139
+msgid "An error occurred while cancelling your subscription. Please try again."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:164
+#, fuzzy
+#| msgid "You do not have access to this report"
+msgid "You don't have canceled subscription to activate."
+msgstr "You do not have access to this report"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:204
+#, fuzzy
+#| msgid "Your stock alert has been cancelled"
+msgid "Your subscription has been successfully Activated."
+msgstr "تم إاغاء تنبيه مخزون المنتج"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:210
+msgid "Unable to reactivate subscription. No subscription found."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:217
+msgid "An error occurred while activating your subscription. Please try again."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:237
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:288
+#, fuzzy
+#| msgid "No payment events."
+msgid "No plan selected."
+msgstr "No payment events."
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:245
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:337
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:372
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:486
+#, fuzzy
+#| msgid "%s does not exist"
+msgid "Selected plan does not exist."
+msgstr "%s does not exist"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:292
+msgid "Number of branches must be at least 1."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:295
+msgid "Number of students must be at least 1."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:312
+msgid "You already have a subscription. Please activate it."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:339
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:488
+msgid "Invalid number of branches provided."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:345
+msgid "An error occurred while processing your subscription. Please try again."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:364
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:427
+msgid "No plan selected for change."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:436
+#, fuzzy
+#| msgid "This address is already in your address book"
+msgid "This is already your current plan."
+msgstr "هذا العنوان مسجل مسبقا في دفتر العناوين الخاص بك"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:444
+msgid "Successfully changed to plan {} for {} branches"
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:483
+#, fuzzy
+#| msgid "You do not have any active alerts for out-of-stock products."
+msgid "You don't have an active subscription to change."
+msgstr "لا يوجد لديك أي تنبيهات فعالة لأي منتج غير متوفر حاليا"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:493
+msgid "An error occurred while changing your plan. Please try again."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:566
+#, fuzzy
+#| msgid "User '%s' was updated successfully."
+msgid "Your subscription has been updated successfully."
+msgstr "معلومات المستعمل '%s' تم تحيثها بنجاح"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:573
+msgid "An error occurred while updating your subscription. Please try again."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:614
+#, fuzzy
+#| msgid "Your stock alert has been cancelled"
+msgid "Your subscription has been successfully renewed."
+msgstr "تم إاغاء تنبيه مخزون المنتج"
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:619
+msgid "Unable to find the expired subscription to renew."
+msgstr ""
+
+#: src/django-oscar/src/oscar/apps/dashboard/subscriptions/views.py:627
+msgid "An error occurred while renewing your subscription. Please try again."
+msgstr ""
 
 #: src/django-oscar/src/oscar/apps/dashboard/users/apps.py:11
 msgid "Users dashboard"
@@ -4456,7 +4961,7 @@ msgid ""
 msgstr ""
 
 #: src/django-oscar/src/oscar/apps/offer/abstract_models.py:1033
-#: src/django-oscar/src/oscar/defaults.py:136
+#: src/django-oscar/src/oscar/defaults.py:143
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/ranges/range_delete.html:7
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/ranges/range_delete.html:14
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/ranges/range_form.html:7
@@ -4832,7 +5337,6 @@ msgid "Partner Notes"
 msgstr "ملاحظات الشركاء"
 
 #: src/django-oscar/src/oscar/apps/order/abstract_models.py:560
-#: src/django-oscar/src/oscar/apps/partner/abstract_models.py:166
 msgid "Stock record"
 msgstr ""
 
@@ -5150,14 +5654,6 @@ msgstr "Fulfillment partner"
 msgid "Fulfillment partners"
 msgstr "Fulfillment partners"
 
-#: src/django-oscar/src/oscar/apps/partner/abstract_models.py:129
-#: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_content.html:31
-#: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_content.html:92
-#: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_content.html:183
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_update.html:237
-msgid "Price"
-msgstr "السعر"
-
 #: src/django-oscar/src/oscar/apps/partner/abstract_models.py:134
 msgid "Number in stock"
 msgstr "Number in stock"
@@ -5420,6 +5916,8 @@ msgstr ""
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_list.html:29
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_user_select.html:28
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_list.html:34
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:36
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:58
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/list.html:31
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/index.html:29
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/index.html:34
@@ -5616,8 +6114,8 @@ msgid "Case insensitive / No spaces allowed"
 msgstr "Case insensitive / No spaces allowed"
 
 #: src/django-oscar/src/oscar/apps/voucher/abstract_models.py:119
-#: src/django-oscar/src/oscar/defaults.py:204
-#: src/django-oscar/src/oscar/defaults.py:214
+#: src/django-oscar/src/oscar/defaults.py:215
+#: src/django-oscar/src/oscar/defaults.py:225
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_delete.html:7
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_delete.html:14
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_detail.html:15
@@ -5766,25 +6264,25 @@ msgstr "هذا الحقل مطلوب"
 msgid "This field is invalid as its value is forbidden"
 msgstr ""
 
-#: src/django-oscar/src/oscar/defaults.py:140
+#: src/django-oscar/src/oscar/defaults.py:147
 msgid "Low stock alerts"
 msgstr "تنبيهات انخفاض المخزون"
 
-#: src/django-oscar/src/oscar/defaults.py:148
+#: src/django-oscar/src/oscar/defaults.py:155
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/attribute_option_group_list.html:6
 msgid "Attribute Option Groups"
 msgstr ""
 
-#: src/django-oscar/src/oscar/defaults.py:154
+#: src/django-oscar/src/oscar/defaults.py:165
 msgid "Fulfilment"
 msgstr "الإنجاز"
 
-#: src/django-oscar/src/oscar/defaults.py:167
+#: src/django-oscar/src/oscar/defaults.py:178
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/statistics.html:17
 msgid "Statistics"
 msgstr "إحصائيات"
 
-#: src/django-oscar/src/oscar/defaults.py:171
+#: src/django-oscar/src/oscar/defaults.py:182
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_delete.html:7
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_delete.html:14
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_form.html:8
@@ -5803,9 +6301,9 @@ msgstr "إحصائيات"
 msgid "Partners"
 msgstr "الشركاء"
 
-#: src/django-oscar/src/oscar/defaults.py:185
-#: src/django-oscar/src/oscar/defaults.py:194
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:111
+#: src/django-oscar/src/oscar/defaults.py:196
+#: src/django-oscar/src/oscar/defaults.py:205
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:139
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/detail.html:13
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/index.html:9
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/index.html:14
@@ -5813,19 +6311,19 @@ msgstr "الشركاء"
 msgid "Customers"
 msgstr "العملاء"
 
-#: src/django-oscar/src/oscar/defaults.py:198
+#: src/django-oscar/src/oscar/defaults.py:209
 msgid "Stock alert requests"
 msgstr "طلبات انخفاض المخزون"
 
-#: src/django-oscar/src/oscar/defaults.py:222
+#: src/django-oscar/src/oscar/defaults.py:233
 msgid "Voucher Sets"
 msgstr ""
 
-#: src/django-oscar/src/oscar/defaults.py:228
+#: src/django-oscar/src/oscar/defaults.py:239
 msgid "Content"
 msgstr "المحتوى"
 
-#: src/django-oscar/src/oscar/defaults.py:238
+#: src/django-oscar/src/oscar/defaults.py:249
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/pages/delete.html:15
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/pages/index.html:8
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/pages/index.html:15
@@ -5834,11 +6332,11 @@ msgstr "المحتوى"
 msgid "Pages"
 msgstr "الصفحات"
 
-#: src/django-oscar/src/oscar/defaults.py:242
+#: src/django-oscar/src/oscar/defaults.py:253
 msgid "Email templates"
 msgstr "قوالب البريد الإلكتروني"
 
-#: src/django-oscar/src/oscar/defaults.py:246
+#: src/django-oscar/src/oscar/defaults.py:257
 #: src/django-oscar/src/oscar/templates/oscar/catalogue/reviews/review_detail.html:5
 #: src/django-oscar/src/oscar/templates/oscar/catalogue/reviews/review_detail.html:24
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_delete.html:8
@@ -5852,30 +6350,58 @@ msgstr "قوالب البريد الإلكتروني"
 msgid "Reviews"
 msgstr "الترشيحات"
 
-#: src/django-oscar/src/oscar/defaults.py:252
+#: src/django-oscar/src/oscar/defaults.py:263
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reports/index.html:6
 msgid "Reports"
 msgstr "التقارير"
 
-#: src/django-oscar/src/oscar/defaults.py:283
+#: src/django-oscar/src/oscar/defaults.py:292
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:16
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:15
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:10
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:17
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:24
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:16
+msgid "Students"
+msgstr ""
+
+#: src/django-oscar/src/oscar/defaults.py:302
+#, fuzzy
+#| msgid "View Stock Alerts"
+msgid "View Students"
+msgstr "View Stock Alerts"
+
+#: src/django-oscar/src/oscar/defaults.py:306
+#, fuzzy
+#| msgid "Add a new address"
+msgid "Add New Students"
+msgstr "إضافة عنوان جديد"
+
+#: src/django-oscar/src/oscar/defaults.py:331
 msgid "Price range"
 msgstr "نطاق السعر"
 
-#: src/django-oscar/src/oscar/defaults.py:288
+#: src/django-oscar/src/oscar/defaults.py:336
 msgid "0 to 20"
 msgstr "0 إلى 20"
 
-#: src/django-oscar/src/oscar/defaults.py:289
+#: src/django-oscar/src/oscar/defaults.py:337
 msgid "20 to 40"
 msgstr "20 إلى 40"
 
-#: src/django-oscar/src/oscar/defaults.py:290
+#: src/django-oscar/src/oscar/defaults.py:338
 msgid "40 to 60"
 msgstr "40 إلى 60"
 
-#: src/django-oscar/src/oscar/defaults.py:291
+#: src/django-oscar/src/oscar/defaults.py:339
 msgid "60+"
 msgstr "أكثر من 60"
+
+#: src/django-oscar/src/oscar/defaults.py:359
+#, fuzzy
+#| msgid "Description"
+msgid "Subscriptions"
+msgstr "التفاصيل"
 
 #: src/django-oscar/src/oscar/forms/mixins.py:80
 msgid "This is not a valid international phone format."
@@ -6081,6 +6607,13 @@ msgstr ""
 msgid "Items to buy now"
 msgstr "المنتجات للشراء الآن"
 
+#: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_content.html:31
+#: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_content.html:92
+#: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_content.html:183
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/product_update.html:237
+msgid "Price"
+msgstr "السعر"
+
 #: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_content.html:32
 #: src/django-oscar/src/oscar/templates/oscar/basket/partials/basket_content.html:107
 #: src/django-oscar/src/oscar/templates/oscar/checkout/checkout.html:115
@@ -6099,6 +6632,9 @@ msgstr "جاري التحديث..."
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/catalogue/stockalert_list.html:68
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_detail.html:528
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_list.html:50
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:118
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:143
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:19
 msgid "Update"
 msgstr "تحديث"
 
@@ -6220,6 +6756,7 @@ msgstr "أو"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_band_form.html:34
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_delete.html:29
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_form.html:44
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:185
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/delete.html:36
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/update.html:32
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_delete.html:44
@@ -6482,6 +7019,7 @@ msgstr "سيتم إعلامك عبر البريد الإلكتروني حال ت
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/comms/detail.html:76
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/step_form.html:69
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_list.html:86
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:96
 #: src/django-oscar/src/oscar/templates/oscar/partials/nav_accounts.html:25
 msgid "Submitting..."
 msgstr "Submitting..."
@@ -6533,6 +7071,8 @@ msgid "Previous"
 msgstr ""
 
 #: src/django-oscar/src/oscar/templates/oscar/catalogue/partials/gallery.html:26
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import.html:66
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_map.html:94
 msgid "Next"
 msgstr ""
 
@@ -6818,6 +7358,8 @@ msgstr "Ship to this address"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_delete.html:28
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_detail.html:77
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_list.html:48
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:122
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:160
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/delete.html:35
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/list.html:79
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_delete.html:43
@@ -6953,6 +7495,7 @@ msgstr "نعم!"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_update.html:77
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_band_form.html:33
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_form.html:43
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:189
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/update.html:31
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_form.html:41
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_set_form.html:41
@@ -7312,6 +7855,7 @@ msgstr "الأرشيف"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/pages/index.html:71
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reports/partials/order_report.html:30
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_list.html:46
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:140
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/detail.html:137
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/user_row_actions.html:2
 msgid "View"
@@ -7347,6 +7891,7 @@ msgstr "جاري الأرشفة..."
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_delete.html:47
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_band_delete.html:45
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/shipping/weight_based_delete.html:28
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:121
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/delete.html:35
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_delete.html:43
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_set_delete.html:35
@@ -7481,7 +8026,7 @@ msgstr "اجمالي سلة التسوق (مع الضريبة)"
 #: src/django-oscar/src/oscar/templates/oscar/customer/wishlists/wishlists_delete_product.html:11
 #: src/django-oscar/src/oscar/templates/oscar/customer/wishlists/wishlists_detail.html:13
 #: src/django-oscar/src/oscar/templates/oscar/customer/wishlists/wishlists_form.html:11
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:43
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:58
 #: src/django-oscar/src/oscar/templates/oscar/partials/nav_accounts.html:37
 #: src/django-oscar/src/oscar/templates/oscar/partials/nav_accounts.html:43
 msgid "Account"
@@ -8079,6 +8624,7 @@ msgstr "بحث المنتجات"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_list.html:29
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partners/partner_user_select.html:28
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/reviews/review_list.html:34
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:58
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/list.html:31
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/index.html:34
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_list.html:58
@@ -8254,110 +8800,110 @@ msgstr "Body text"
 msgid "There are no defined emails to edit."
 msgstr "There are no defined emails to edit."
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:22
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:25
 msgid "Your Store Statistics"
 msgstr "Your Store Statistics"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:28
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:34
 msgid "Total Orders"
 msgstr "إجمالي الطلبات"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:29
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:38
 msgid "New Customers"
 msgstr "العملاء الجدد"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:30
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:42
 msgid "Total Customers"
 msgstr "إجمالي العملاء"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:31
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:49
 msgid "Total Products"
 msgstr "إجمالي المنتجات"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:35
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:53
 #, fuzzy
 #| msgid "Latest Orders (last 24 hours)"
 msgid "Latest Orders <span>(last 24 hours)"
 msgstr "Latest Orders (last 24 hours)"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:62
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:90
 msgid "Orders - Last 24 Hours"
 msgstr "Orders - Last 24 Hours"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:64
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:91
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:92
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:119
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/statistics.html:39
 msgid "Total orders"
 msgstr "إجمالي الطلبات"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:68
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:95
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:96
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:123
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/statistics.html:43
 msgid "Total lines"
 msgstr "إجمالي الخطوط"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:72
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:99
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:100
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:127
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/statistics.html:47
 msgid "Total revenue"
 msgstr "Total revenue"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:76
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:104
 msgid "Average order costs"
 msgstr "Average order costs"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:86
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:135
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:114
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:163
 msgid "Manage"
 msgstr "إدارة"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:88
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:116
 msgid "Orders - All Time"
 msgstr "الطلبات - كل الوقت"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:103
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:121
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:131
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:149
 msgid "Total <em>open</em> baskets"
 msgstr "سلة المنتجات <em>المفتوحة</em>"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:113
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:141
 msgid "Total customers"
 msgstr "إجمالي العملاء"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:117
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:145
 msgid "New customers"
 msgstr "العملاء الجدد"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:140
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:168
 msgid "View Stock Alerts"
 msgstr "View Stock Alerts"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:144
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:172
 msgid "Catalogue and stock"
 msgstr "Catalogue and stock"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:147
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:175
 msgid "Total products"
 msgstr "إجمالي المنتجات"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:151
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:179
 msgid "<em>Open</em> stock alerts"
 msgstr ""
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:155
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:183
 msgid "<em>Closed</em> stock alerts"
 msgstr ""
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:163
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:191
 msgid "Offers, vouchers"
 msgstr ""
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:166
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:194
 #, python-format
 msgid "Active <em>%(offer_type)s</em> Offers"
 msgstr ""
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:171
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/index.html:199
 msgid "Active <em>Vouchers</em>"
 msgstr ""
 
@@ -8365,11 +8911,11 @@ msgstr ""
 msgid "Welcome"
 msgstr "مرحبا"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:40
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:50
 msgid "Return to site"
 msgstr "العودة للموقع"
 
-#: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:46
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/layout.html:64
 msgid "Log out"
 msgstr "خروج"
 
@@ -8491,6 +9037,10 @@ msgid "Attached vouchers"
 msgstr ""
 
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_detail.html:134
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:69
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:105
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:136
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:159
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/partials/voucher_set_details_table.html:40
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_list.html:114
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_set_list.html:52
@@ -8519,6 +9069,7 @@ msgstr "Create new offer"
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/offer_list.html:55
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/orders/order_list.html:52
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/partials/advanced_search_modal.html:7
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:59
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/vouchers/voucher_list.html:59
 msgid "Advanced Search"
 msgstr "بحث متقدم"
@@ -8583,6 +9134,7 @@ msgid "Save this offer"
 msgstr "حفظ هذا العرضذ"
 
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/offers/step_form.html:71
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:183
 msgid "Save changes"
 msgstr "حفظ التغييرات"
 
@@ -9577,6 +10129,336 @@ msgstr "الوزن الافتراضي (كجم)"
 msgid "No shipping methods found."
 msgstr "لم يتم العثور على وسيلة شحن."
 
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:8
+msgid "Add Student "
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:17
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:24
+msgid "Add Students"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:26
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import.html:5
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import.html:31
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:26
+msgid "Import Students Photos"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:29
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import_success.html:82
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import.html:5
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import.html:42
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:29
+msgid "Import Students"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:42
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:36
+#, fuzzy
+#| msgid "Product Information"
+msgid "Student Information"
+msgstr "معلومات المنتج"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:160
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:154
+#, fuzzy
+#| msgid "Product Information"
+msgid "Parent Information"
+msgstr "معلومات المنتج"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:164
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:80
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:158
+#, fuzzy
+#| msgid "First name"
+msgid "First Name"
+msgstr "الأسم الأول"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_create.html:171
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:84
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:165
+#, fuzzy
+#| msgid "Last name"
+msgid "Last Name"
+msgstr "اسم العائلة"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:8
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:22
+#, python-format
+msgid "Student %(full_name)s"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:30
+#, fuzzy
+#| msgid "Order information"
+msgid "Student information"
+msgstr "Order information"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:40
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:105
+msgid "National id"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:52
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:92
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:108
+#, fuzzy
+#| msgid "Start date"
+msgid "Birthdate"
+msgstr "تاريخ البداية"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:77
+#, fuzzy
+#| msgid "Order information"
+msgid "Parent information"
+msgstr "Order information"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_detail.html:110
+#, fuzzy
+#| msgid "No order found with this number"
+msgid "No parent registered with this phone number"
+msgstr "لا يوجد طلبات بهذا الرقم"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import.html:40
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import.html:57
+msgid "View Available Students Photos"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import.html:42
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import_success.html:32
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import.html:58
+#, fuzzy
+#| msgid "Available until %(end)s"
+msgid "Available Students Photos"
+msgstr "Available until %(end)s"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import.html:47
+#, fuzzy
+#| msgid "Select option"
+msgid "Select Photos"
+msgstr "اختيار طريقة شحن"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import.html:51
+#, fuzzy
+#| msgid "Date uploaded"
+msgid "upload"
+msgstr "تاريخ الرفع"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import_success.html:5
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import_success.html:32
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:5
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:90
+#, fuzzy
+#| msgid "Complete"
+msgid "Import Complete"
+msgstr "تمت"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import_success.html:40
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                Are you sure you want to delete %(name)s?\n"
+#| "            "
+msgid ""
+"\n"
+"                Successfully imported %(count)s photos.\n"
+"                "
+msgstr ""
+"\n"
+"                هل انت متأكد من حذف %(name)s؟\n"
+"            "
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import_success.html:48
+msgid ""
+"These are the photos available for use in students imports. Use these "
+"filenames in your CSV file's 'Photo' column."
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import_success.html:79
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:23
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:116
+#, fuzzy
+#| msgid "Return to site"
+msgid "Return to Student List"
+msgstr "العودة للموقع"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_images_import_success.html:85
+msgid "Import More Photos"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import.html:52
+#, fuzzy
+#| msgid "Download CSV"
+msgid "Download sample CSV"
+msgstr "تحميل بصيغة CSV"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import.html:53
+#, fuzzy
+#| msgid "Email Body Template"
+msgid "Download Template"
+msgstr "قالب الرسالة الإلكترونية"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import.html:62
+msgid "Select CSV File"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_map.html:5
+msgid "Map Fields"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_map.html:41
+msgid "Map CSV Fields"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_map.html:53
+msgid "Student Field"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_map.html:54
+msgid "CSV Column"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_map.html:65
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_map.html:81
+#, fuzzy
+#| msgid "Select option"
+msgid "Select CSV column"
+msgstr "اختيار طريقة شحن"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_map.html:95
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_preview.html:79
+msgid "Back"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_preview.html:5
+#, fuzzy
+#| msgid "Preview order"
+msgid "Preview Import"
+msgstr "عرض مسبق للطلب"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_preview.html:41
+#, fuzzy
+#| msgid "Preview email"
+msgid "Preview Import Data"
+msgstr "معاينة البريد الإلكتروني"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_preview.html:48
+msgid "Showing first 5 rows of data. Please review before confirming import."
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_preview.html:76
+#, fuzzy
+#| msgid "Confirm password"
+msgid "Confirm Import"
+msgstr "تأكيد كلمة المرور"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_preview.html:85
+#, fuzzy
+#| msgid "No notes available."
+msgid "No preview data available."
+msgstr "No notes available."
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_preview.html:87
+#, fuzzy
+#| msgid "Start date"
+msgid "Start Over"
+msgstr "تاريخ البداية"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:17
+msgid "The following errors happened while importing students"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:26
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:119
+msgid "Import More Students"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:97
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                Are you sure you want to delete %(name)s?\n"
+#| "            "
+msgid ""
+"\n"
+"                Successfully imported %(count)s students.\n"
+"                "
+msgstr ""
+"\n"
+"                هل انت متأكد من حذف %(name)s؟\n"
+"            "
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_import_success.html:105
+msgid "Import Errors"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:67
+#, fuzzy
+#| msgid "Filter"
+msgid "Filters"
+msgstr "Filter"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:71
+msgid "Clear"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:87
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:180
+#, fuzzy
+#| msgid "Product search results"
+msgid "Student Search Results"
+msgstr "نتائج البحث عن منتج"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:89
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:182
+#, fuzzy
+#| msgid "All users"
+msgid "All Students"
+msgstr "جميع المستخدمين"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:94
+#, fuzzy
+#| msgid "Download selected orders as a CSV"
+msgid "Download selected students as a CSV"
+msgstr "Download selected orders as a CSV"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:133
+msgid "Male"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:133
+msgid "Female"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:157
+#, fuzzy
+#| msgid "Post order actions"
+msgid "Choose action"
+msgstr "الأحداث بعد الطلب"
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:166
+#, fuzzy
+#| msgid "Adding..."
+msgid "Applying..."
+msgstr "جاري الإضافة..."
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:167
+msgid "Apply"
+msgstr ""
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_list.html:186
+#, fuzzy
+#| msgid "No results found."
+msgid "No students found."
+msgstr "No results found."
+
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:8
+#: src/django-oscar/src/oscar/templates/oscar/dashboard/students/student_update.html:25
+#, python-format
+msgid "Update Student %(full_name)s"
+msgstr ""
+
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/delete.html:8
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/delete.html:16
 #: src/django-oscar/src/oscar/templates/oscar/dashboard/users/alerts/update.html:15
@@ -10155,3 +11037,18 @@ msgstr "العودة لنتائج البحث"
 #, python-format
 msgid "You need to select some %ss"
 msgstr "يتوجب عليك إختيار بعض %ss"
+
+#~ msgid "Requires shipping?"
+#~ msgstr "يتطلب الشحن؟"
+
+#~ msgid "Show this product in search results and catalogue listings."
+#~ msgstr "إظهار هذا المنتج في نتائج البحث و فهرس المنتجات."
+
+#~ msgid "Is discountable?"
+#~ msgstr "قابل للخصم؟"
+
+#~ msgid "This flag indicates if this product can be used in an offer or not"
+#~ msgstr "يشير هذا الخيار إذا كان يمكن استخدام هذا المنتج في العرض أم لا"
+
+#~ msgid "Product title"
+#~ msgstr "اسم المنتج"

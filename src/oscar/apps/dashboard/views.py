@@ -136,8 +136,8 @@ class IndexView(TemplateView):
 
             orders_last_day = orders.filter(date_placed__gt=datetime_24hrs_ago)
 
-            open_alerts = alerts.filter(status=StockAlert.OPEN)
-            closed_alerts = alerts.filter(status=StockAlert.CLOSED)
+            # open_alerts = alerts.filter(status=StockAlert.OPEN)
+            # closed_alerts = alerts.filter(status=StockAlert.CLOSED)
 
             total_lines_last_day = lines.filter(order__in=orders_last_day).count()
             stats = {
@@ -159,8 +159,8 @@ class IndexView(TemplateView):
                     date_created__gt=datetime_24hrs_ago
                 ).count(),
                 "total_products": products.count(),
-                "total_open_stock_alerts": open_alerts.count(),
-                "total_closed_stock_alerts": closed_alerts.count(),
+                # "total_open_stock_alerts": open_alerts.count(),
+                # "total_closed_stock_alerts": closed_alerts.count(),
                 "total_customers": customers.count(),
                 "total_open_baskets": baskets.count(),
                 "total_orders": orders.count(),
