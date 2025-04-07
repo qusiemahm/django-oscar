@@ -143,9 +143,9 @@ class AbstractOrder(models.Model):
         """
         Set a new status for this order.
         """
-        if new_status == self.status:
-            logger.info(f"⏭️ Order {self.number}: Status unchanged ({new_status}), skipping update.")
-            return
+        # if new_status == self.status:
+        #     logger.info(f"⏭️ Order {self.number}: Status unchanged ({new_status}), skipping update.")
+        #     return
 
         old_status = self.status
         logger.info(f"📊 Order {self.number}: Changing status from {old_status} to {new_status}")
@@ -166,8 +166,11 @@ class AbstractOrder(models.Model):
 
         # Notify the user via WebSocket
         self.notify_user_websocket(new_status)
+        
+        # Notify the vendor via WebSocket
+        self.notify_vendor_websocket(new_status)
 
-        logger.info(f"✅ Order {self.number}: Status updated to {new_status} and WebSocket user notified.")
+        logger.info(f"✅ Order {self.number}: Status updated to {new_status} and WebSocket notifications sent.")
 
 
     set_status.alters_data = True
@@ -228,36 +231,48 @@ class AbstractOrder(models.Model):
                 print("❌ Channel layer is None")
                 return
 
-            # If your Order model has a .store field, and the store has a .vendor
+            # Check if the order has a store (branch) associated
             if not hasattr(self, "store") or not self.store:
                 print("❌ Order has no store associated, cannot notify vendor staff")
                 return
             
+            # Get vendor and branch IDs
             vendor_id = self.store.vendor_id
-            branch_id = self.store.id  # The store ID
+            branch_id = self.store.id
 
-            # Common message payload
+            # Create the notification message payload
             message = {
                 "type": "send_order_notification",  # must match consumer handler
                 "data": {
+                    "type": "order_update",
                     "message": f"Order {self.number} updated to {new_status}",
-                    "order_number": self.number,
-                    "status": new_status,
-                },
+                    "order": {
+                        "order_id": self.id,
+                        "order_number": self.number,
+                        "status": new_status,
+                        "total_price": str(self.total_incl_tax),
+                        "currency": self.currency or "SAR",
+                        "date_placed": self.date_placed.isoformat(),
+                        "branch_id": branch_id,
+                        "branch_name": self.store.name
+                    }
+                }
             }
 
-            # 1) Notify the entire vendor group (super_admin/admin)
+            # 1) Send to the vendor-wide group (for admins/super-admins)
             vendor_group = f"vendor_{vendor_id}"
             async_to_sync(channel_layer.group_send)(vendor_group, message)
+            print(f"✅ Notification sent to vendor-wide group: {vendor_group}")
 
-            # 2) Also notify the branch-specific group (manager/staff)
+            # 2) Also send to the branch-specific group (for branch managers/staff)
             branch_group = f"vendor_{vendor_id}_branch_{branch_id}"
             async_to_sync(channel_layer.group_send)(branch_group, message)
-
-            print("✅ WebSocket notification sent to both vendor-wide and branch-specific groups")
+            print(f"✅ Notification sent to branch-specific group: {branch_group}")
 
         except Exception as e:
             print(f"❌ Error in notify_vendor_websocket: {str(e)}")
+            import traceback
+            print(traceback.format_exc())
 
 
     def _create_order_status_change(self, old_status, new_status):
