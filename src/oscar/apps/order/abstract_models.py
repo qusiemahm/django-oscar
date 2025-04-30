@@ -254,7 +254,14 @@ class AbstractOrder(models.Model):
                         "currency": self.currency or "SAR",
                         "date_placed": self.date_placed.isoformat(),
                         "branch_id": branch_id,
-                        "branch_name": self.store.name
+                        "branch_name": self.store.name,
+                        "items": self.basket.lines.count(),
+                        "items_test": 2,
+                        "user": {
+                            "id": self.user.id,
+                            "email": self.user.email,
+                            "full_name": self.user.get_full_name(),
+                        }
                     }
                 }
             }
