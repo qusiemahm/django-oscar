@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.db.models import Sum
+from django.db.models import Q
 from django.utils.encoding import smart_str
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -465,19 +466,50 @@ class AbstractBasket(models.Model):
     def _get_option_prices(self, line):
         """
         Calculate the total price of all options for a given line,
-        multiplied by the product quantity.
+        multiplied by the product quantity. Match option values in a
+        language-agnostic way and also support values stored as ids.
         """
         option_prices = D("0.00")
 
-        # Iterate over all attributes (options) for the line
-        for attribute in line.attributes.all():
+        # Build list of translatable fields for AttributeOption.option
+        language_codes = getattr(settings, "LANGUAGES", [])
+        option_fields = ["option"] + [f"option_{code}" for code, _ in language_codes]
 
-            # Retrieve the related AttributeOption object
+        def resolve_attribute_option(value, group):
+            if group is None:
+                return None
+
+            # Try primary key lookup first (value may be dict/id/str digit)
             try:
-                attribute_option = attribute.option.option_group.options.get(option=attribute.value)
-                option_price = attribute_option.price * line.quantity  # Multiply by the line quantity
-                option_prices += option_price
-            except :
+                if isinstance(value, dict):
+                    candidate_id = value.get("id") or value.get("pk")
+                    if candidate_id:
+                        return group.options.get(pk=candidate_id)
+                if isinstance(value, int) or (isinstance(value, str) and value.isdigit()):
+                    return group.options.get(pk=int(value))
+            except group.options.model.DoesNotExist:  # type: ignore[attr-defined]
+                pass
+
+            # Fall back to matching the display label across translations
+            sval = str(value).strip()
+            if sval:
+                q = Q()
+                for field in option_fields:
+                    q |= Q(**{f"{field}__iexact": sval})
+                return group.options.filter(q).first()
+            return None
+
+        for attribute in line.attributes.all():
+            try:
+                group = getattr(attribute.option, "option_group", None)
+                raw_value = attribute.value
+                values = raw_value if isinstance(raw_value, (list, tuple)) else [raw_value]
+
+                for v in values:
+                    ao = resolve_attribute_option(v, group)
+                    if ao and getattr(ao, "price", None) is not None:
+                        option_prices += D(str(ao.price)) * line.quantity
+            except Exception:
                 continue
 
         return option_prices
