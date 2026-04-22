@@ -479,14 +479,26 @@ class AbstractBasket(models.Model):
             if group is None:
                 return None
 
-            # Try primary key lookup first (value may be dict/id/str digit)
+            def extract_candidate_id(raw_value):
+                if isinstance(raw_value, dict):
+                    raw_value = raw_value.get("id") or raw_value.get("pk")
+
+                if isinstance(raw_value, str):
+                    raw_value = raw_value.strip()
+                    if raw_value.upper().startswith("ID:"):
+                        raw_value = raw_value.split(":", 1)[1].strip()
+
+                if isinstance(raw_value, int):
+                    return raw_value
+                if isinstance(raw_value, str) and raw_value.isdigit():
+                    return int(raw_value)
+                return None
+
+            # Try primary key lookup first (value may be dict/id/"ID:<pk>"/str digit)
             try:
-                if isinstance(value, dict):
-                    candidate_id = value.get("id") or value.get("pk")
-                    if candidate_id:
-                        return group.options.get(pk=candidate_id)
-                if isinstance(value, int) or (isinstance(value, str) and value.isdigit()):
-                    return group.options.get(pk=int(value))
+                candidate_id = extract_candidate_id(value)
+                if candidate_id is not None:
+                    return group.options.get(pk=candidate_id)
             except group.options.model.DoesNotExist:  # type: ignore[attr-defined]
                 pass
 
