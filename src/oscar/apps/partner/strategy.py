@@ -4,6 +4,7 @@ from decimal import Decimal as D
 from django.db.models import QuerySet
 
 from oscar.core.loading import get_class
+from oscar.core.utils import get_default_currency
 from server.apps.main.models import SystemConfiguration
 
 Unavailable = get_class("partner.availability", "Unavailable")
@@ -251,7 +252,7 @@ class NoTax(object):
         if product.selling_price is None:
             return UnavailablePrice()
         return FixedPrice(
-            currency=product.price_currency or "SAR",  # fallback or your default
+            currency=product.price_currency or get_default_currency(),
             excl_tax=product.selling_price,
             tax=D("0.00"),
         )
@@ -264,7 +265,7 @@ class NoTax(object):
         """
         if product.selling_price is not None:
             return FixedPrice(
-                currency=product.price_currency or "USD",
+                currency=product.price_currency or get_default_currency(),
                 excl_tax=product.selling_price,
                 tax=D("0.00"),
             )
@@ -272,7 +273,7 @@ class NoTax(object):
         for (child, stockrecord) in children_stock:
             if child.selling_price is not None:
                 return FixedPrice(
-                    currency=child.price_currency or "USD",
+                    currency=child.price_currency or get_default_currency(),
                     excl_tax=child.selling_price,
                     tax=D("0.00"),
                 )
@@ -296,7 +297,7 @@ class FixedRateTax(object):
         base_price = product.selling_price
         tax = (base_price * self.rate).quantize(self.exponent)
         return TaxInclusiveFixedPrice(
-            currency=product.price_currency or "USD",
+            currency=product.price_currency or get_default_currency(),
             excl_tax=base_price,
             tax=tax,
         )
@@ -310,7 +311,7 @@ class FixedRateTax(object):
         if product.selling_price is not None:
             tax = (product.selling_price * self.rate).quantize(self.exponent)
             return TaxInclusiveFixedPrice(
-                currency=product.price_currency or "USD",
+                currency=product.price_currency or get_default_currency(),
                 excl_tax=product.selling_price,
                 tax=tax,
             )
@@ -319,7 +320,7 @@ class FixedRateTax(object):
             if child.selling_price is not None:
                 tax = (child.selling_price * self.rate).quantize(self.exponent)
                 return TaxInclusiveFixedPrice(
-                    currency=child.price_currency or "USD",
+                    currency=child.price_currency or get_default_currency(),
                     excl_tax=child.selling_price,
                     tax=tax,
                 )
@@ -355,20 +356,20 @@ class DeferredTax(object):
         if product.selling_price is None:
             return UnavailablePrice()
         return FixedPrice(
-            currency=product.price_currency or "USD",
+            currency=product.price_currency or get_default_currency(),
             excl_tax=product.selling_price,
         )
 
     def parent_pricing_policy(self, product, children_stock):
         if product.selling_price is not None:
             return FixedPrice(
-                currency=product.price_currency or "USD",
+                currency=product.price_currency or get_default_currency(),
                 excl_tax=product.selling_price,
             )
         for (child, _) in children_stock:
             if child.selling_price is not None:
                 return FixedPrice(
-                    currency=child.price_currency or "USD",
+                    currency=child.price_currency or get_default_currency(),
                     excl_tax=child.selling_price,
                 )
         return UnavailablePrice()
